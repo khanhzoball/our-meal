@@ -1,14 +1,21 @@
 import React from "react"
 import {Link} from "react-router-dom"
+import "./comp.css";
+import logo from './assets/logo.png';
 
 const Navbar = () => {
     return(
         <nav>
-            <div className="topnav">
-                <Link to="/">Home</Link>
-                <Link to="/login">Login</Link>
-                <Link to="/signup">Signup</Link>
-                <Link to="/menu">Menu</Link>
+            <div className="topnav" >
+                <Link to="/"><img className="resize" src={logo}></img></Link>
+                <span> </span>
+                <Link to="/menu" className="menu"> Menu</Link>
+                <div className = "logsign">
+                    <Link to="/signup">Signup</Link>
+                </div>
+                <div className = "logsign">
+                    <Link to="/login">Login</Link>
+                </div>
             </div>
         </nav>
     )

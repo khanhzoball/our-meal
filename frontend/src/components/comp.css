@@ -1,0 +1,52 @@
+.topnav{
+    background-color: #0f4d92;
+    font-family: Arial, Helvetica, sans-serif;
+    color:white;
+    padding: 30px;
+
+}
+.logsign
+{
+    padding: 6px;
+    border-radius: 4px;
+    background-color: rgb(5, 194, 106);
+    float: right;
+
+}
+.resize{
+    height: 40px;
+    width: auto;
+}
+.menu
+{
+    padding: 6px;
+    border-radius: 4px;
+    margin: 0px;
+    background: rgb(250, 59, 11);
+    position: absolute;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%) 
+}
+.Halls{
+    padding: 10px;
+    border-radius: 6px;
+    display: flex;
+    background-color: #0f4d92;
+    margin: 15px;
+    align-items: center;
+    position:absolute;
+    flex-wrap: wrap;
+
+}
+.hallName
+{
+    padding: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    background-color: lightblue;
+
+}

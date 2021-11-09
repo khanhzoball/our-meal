@@ -1,3 +1,12 @@
 a{
-  font-size: 10px;
+  font-size: 20px;
+
+}
+a:link{
+  color: whitesmoke;
+  text-decoration: none;
+}
+a:visited{
+  color: whitesmoke;
+  text-decoration: none;
 }
