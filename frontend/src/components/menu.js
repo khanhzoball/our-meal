@@ -1,10 +1,50 @@
 import React from "react";
+import { useState, useEffect } from 'react';
+import { render } from "react-dom";
 
 var today = new Date();
 var date = today.getFullYear() + '-' + (today.getMonth()+1) + '-' + today.getDate();
 
 
-let halls_arr = null;
+
+function Menu() {
+  const [halls, setData] = useState(null);
+
+  useEffect(() => {
+    getData();
+
+    async function getData() {
+      const response = await fetch("https://api.yalemenus.com/halls");
+      const data = await response.json();
+
+      setData(data) ;
+    }
+  }, []); 
+
+  return (
+    <div>
+    <h1>Halls</h1>
+    {halls && (
+      <div className="Halls">
+        {halls.map((halls, index) => (
+          <div key={index}>
+            <h2 className="hallName">{halls.name}</h2>
+          </div>
+        ))}
+
+      </div>
+    )}
+  </div>
+)
+}
+
+export default Menu
+/*
+
+
+
+
+let halls_arr = [];
 
 var halls = fetch("https://api.yalemenus.com/halls")
 halls
@@ -80,17 +120,16 @@ const Menu = () => {
     return (
         <div className="Halls">
             { 
-            halls_arr.map(hall => 
+            halls_arr.map((hall) => 
                 {
                     return <Dining_halls
                     hall_name = {hall.name}
                     hall_id = {hall.id}
                     />
                 })
+
             }
         </div>
     )
 }
-
-
-export default Menu
+*/
