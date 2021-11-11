@@ -20,9 +20,11 @@ mongoose.connection.on("error", () => {
 
 require("./models/user");
 require("./models/plan");
+require("./models/hall");
 
 App.use(express.json());
 App.use(require("./routes/auth.js"));
+App.use(require("./routes/review.js"));
 
 
 App.listen(PORT, () => {
