@@ -232,8 +232,6 @@ const Menu = () => {
             })
         }
 
-        var temp_comment = ""
-
         return (
             <div>
                 <h1>
