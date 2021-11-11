@@ -1,6 +1,8 @@
 import React from "react";
 import { useState, useEffect } from 'react';
 
+
+//////// IGNORE THIS MESSAGE: IT IS ONLY HERE IN CASE WE SWITCH BACK TO YALE API ////////
     //             // nutritions JSON keys include
     //             /*
     //             calcium
@@ -39,7 +41,7 @@ import { useState, useEffect } from 'react';
     //             */
 
 var today = new Date();
-var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + ('0' + today.getDate()).slice(-2);
+var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + ('0' + (today.getDate() + 1)).slice(-2);
 
 const Menu = () => {
     var [halls, setHalls] = useState([]);
@@ -65,7 +67,6 @@ const Menu = () => {
             fetch("https://michigan-dining-api.tendiesti.me/v1/menus?date=" + date + "&diningHall=" + props.hall_name.replaceAll(" ", "%20"))
             .then( (response) => response.json())
             .then( (resJson) => {
-                // console.log(resJson)
                 if (resJson.menus) {
                     setMenus(resJson.menus)
                 }
@@ -88,7 +89,6 @@ const Menu = () => {
                     if (resJson.menus[0].category) {
                         setCategory(resJson.menus[0].category)
                     }
-                    // console.log("https://michigan-dining-api.tendiesti.me/v1/menus?date=" + date + "&diningHall=" + props.hall_name.replaceAll(" ", "%20") + "&meal=" + props.meal_name.replaceAll(" ", "%20"))
                     
                     
                 })
@@ -144,7 +144,8 @@ const Menu = () => {
                         return (
                             <div>
                                 <h4>
-                                {props.menuItem.name}
+                                {props.menuItem.name} 
+                                <button>Add</button>
                                 </h4>
                                 <div>
                                     {
@@ -162,6 +163,7 @@ const Menu = () => {
                             <div>
                                 <h4>
                                 {props.menuItem.name}
+                                <button>Add</button>
                                 </h4>
                             </div>
                         )}
@@ -202,10 +204,47 @@ const Menu = () => {
             )
         }
 
+
+
+        const [comment, setComment] = useState("");
+
+        const Post = () => {
+            fetch("/comment", {
+                method: "POST",
+                headers: {
+                    "Content-Type":"application/json",
+                    "Accept":"application/json",
+                },
+                body: JSON.stringify({
+                    hall_name: props.hall_name, 
+                    comment,
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                let message = document.getElementById("message")
+                if (data.error) {
+                    message.innerHTML = data.error + "<br/>";
+                }
+                else {
+                    message.innerHTML = data.message + "<br/>";
+                }
+            })
+        }
+
+        var temp_comment = ""
+
         return (
             <div>
                 <h1>
                 {props.hall_name}
+                <br/>
+                <button>Upvote</button>
+                <br/>
+                <input type="text" placeholder="comment" value={comment} onChange={ (e) => setComment(e.target.value) }/>
+                <button id="submit_button" onClick={ () => Post() }>Add Comment</button>
+                <br/>
+                <span id="message"></span>
                 </h1>
                 <div className="Meals">
                     {
