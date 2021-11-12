@@ -25,6 +25,7 @@ require("./models/hall");
 App.use(express.json());
 App.use(require("./routes/auth.js"));
 App.use(require("./routes/review.js"));
+App.use(require("./routes/plan.js"));
 
 
 App.listen(PORT, () => {
