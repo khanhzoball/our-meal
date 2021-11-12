@@ -1,9 +1,37 @@
 const express = require("express")
 const mongoose = require("mongoose")
+const user = mongoose.model("user")
+const jwt = require("jsonwebtoken")
+const router = express.Router()
+const secret = process.env.SECRET
 const login_verif = require("../middlewares/login_verif.js")
 
-const router = express.router()
 
-router.post("createplan")
+router.post("/addfood", (request, response) => {
+    
+    if (!request.body.username) {
+        return response.status(422).json({ error: "Please log in to add to plan" });
+    }
+
+    user.findOne({username: request.body.username})
+    .then((user) => {
+        if (user) {
+            var temp = user.foods
+            temp.push(request.body.menuItem)
+            user.foods = temp
+            user.save()
+            response.json({ message: "Food Successfully added!" })
+            
+        } else {
+            response.status(404).json({ error: "Error" });
+            console.log("error here")
+        }       
+    })
+    .catch(error => {
+        console.log(error)
+        console.log("error happens here")
+    })
+})
+
 
 module.exports = router
