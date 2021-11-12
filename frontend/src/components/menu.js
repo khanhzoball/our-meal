@@ -1,55 +1,20 @@
 import React from "react";
 import { useState, useEffect } from 'react';
 
-
-//////// IGNORE THIS MESSAGE: IT IS ONLY HERE IN CASE WE SWITCH BACK TO YALE API ////////
-    //             // nutritions JSON keys include
-    //             /*
-    //             calcium
-    //             calcium_pdv
-    //             calories
-    //             cholesterol
-    //             cholesterol_pdv
-    //             dietary_fiber
-    //             dietary_fiber_pdv
-    //             iron
-    //             iron_pdv
-    //             item_id
-    //             potassium
-    //             potassium_pdv
-    //             protein
-    //             protein_pdv
-    //             saturated_fat
-    //             saturated_fat_pdv
-    //             serving_size
-    //             sodium
-    //             sodium_pdv
-    //             total_carbohydrate
-    //             total_carbohydrate_pdv
-    //             total_fat
-    //             total_fat_pdv
-    //             total_sugars
-    //             total_sugars_pdv
-    //             trans_fat
-    //             trans_fat_pdv
-    //             vitamin_a
-    //             vitamin_a_pdv
-    //             vitamin_c
-    //             vitamin_c_pdv
-    //             vitamin_d
-    //             vitamin_d_pdv
-    //             */
-
 var today = new Date();
 var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + ('0' + (today.getDate() + 1)).slice(-2);
 
 const Menu = () => {
+
+
+
     var [halls, setHalls] = useState([]);
     
     // Fetching Hall
     useEffect(() => {
         async function getHallData() {
-            const response = await fetch("https://michigan-dining-api.tendiesti.me/v1/diningHalls");
+            // const response = await fetch("https://michigan-dining-api.tendiesti.me/v1/diningHalls");
+            const response = await fetch("https://michigan-dining-api.herokuapp.com/v1/diningHalls");
             const data = await response.json();
             setHalls(data.diningHalls) ;
         }
@@ -64,7 +29,7 @@ const Menu = () => {
 
         //fetching meal
         useEffect(() => {
-            fetch("https://michigan-dining-api.tendiesti.me/v1/menus?date=" + date + "&diningHall=" + props.hall_name.replaceAll(" ", "%20"))
+            fetch("https://michigan-dining-api.herokuapp.com/v1/menus?date=" + date + "&diningHall=" + props.hall_name.replaceAll(" ", "%20"))
             .then( (response) => response.json())
             .then( (resJson) => {
                 if (resJson.menus) {
@@ -82,7 +47,7 @@ const Menu = () => {
 
             //fetching category
             useEffect(() => {
-                fetch("https://michigan-dining-api.tendiesti.me/v1/menus?date=" + date + "&diningHall=" + props.hall_name.replaceAll(" ", "%20") + "&meal=" + props.meal_name.replaceAll(" ", "%20"))
+                fetch("https://michigan-dining-api.herokuapp.com/v1/menus?date=" + date + "&diningHall=" + props.hall_name.replaceAll(" ", "%20") + "&meal=" + props.meal_name.replaceAll(" ", "%20"))
                 .then( (response) => response.json())
                 .then( (resJson) => {
                     // console.log(resJson)
@@ -95,29 +60,10 @@ const Menu = () => {
                 .catch( (error) => {
                     console.log(error);
                 })
-                // async function getMealData() {
-                //     const response = await fetch("https://api.yalemenus.com/meals/" + props.meal_id + "/items");
-                //     const data = await response.json();
-                //     setitems(data) ;
-                // }
-        
-                // getMealData();
+
             },[]);
 
             const CATEGORY_MAPPER = (props) => {
-                // var [nutritions, setnutritions] = useState([]);
-
-                // useEffect(() => {
-                //     fetch("https://api.yalemenus.com/items/" + props.item_id + "/nutrition")
-                //     .then( (response) => response.json())
-                //     .then( (resJson) => {
-                //         // console.log(resJson)
-                //         setnutritions(resJson)
-                //     })
-                //     .catch( (error) => {
-                //         console.log(error);
-                //     })
-                // },[]);
                 
                 const ITEM_MAPPER = (props) => {
 
@@ -126,7 +72,6 @@ const Menu = () => {
                         var name = props.nutritionalInfo.name
                         var value = ""
                         var units = ""
-                        
                         
                         if (props.nutritionalInfo.value) {
                             value = props.nutritionalInfo.value
@@ -139,14 +84,39 @@ const Menu = () => {
                             <div> {name + ": " + value + units } </div>
                         )
                     }
+
+                    const Add_to_plan = () => {
+                        fetch("/addfood", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type":"application/json",
+                                "Accept":"application/json",
+                            },
+                            body: JSON.stringify({
+                                menuItem: props.menuItem.name,
+                                username: localStorage.username
+                            })
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            let message = document.getElementById(props.menuItem.name)
+                            if (data.error) {
+                                message.innerHTML = data.error + "<br/>";
+                            }
+                            else {
+                                message.innerHTML = data.message + "<br/>";
+                            }
+                        })
+                    }
                     
                     if (props.menuItem.itemSizes[0].nutritionalInfo) {
                         return (
                             <div>
                                 <h4>
                                 {props.menuItem.name} 
-                                <button>Add</button>
+                                <button id="submit_button" onClick={ () => Add_to_plan() }>Add to Plan</button>
                                 </h4>
+                                <span id={props.menuItem.name}></span>
                                 <div>
                                     {
                                         props.menuItem.itemSizes[0].nutritionalInfo.map(nutritionalInfo =>
@@ -208,7 +178,7 @@ const Menu = () => {
 
         const [comment, setComment] = useState("");
 
-        const Post = () => {
+        const Add_Comment = () => {
             fetch("/comment", {
                 method: "POST",
                 headers: {
@@ -222,7 +192,7 @@ const Menu = () => {
             })
             .then(response => response.json())
             .then(data => {
-                let message = document.getElementById("message")
+                let message = document.getElementById(props.hall_name)
                 if (data.error) {
                     message.innerHTML = data.error + "<br/>";
                 }
@@ -240,9 +210,9 @@ const Menu = () => {
                 <button>Upvote</button>
                 <br/>
                 <input type="text" placeholder="comment" value={comment} onChange={ (e) => setComment(e.target.value) }/>
-                <button id="submit_button" onClick={ () => Post() }>Add Comment</button>
+                <button id="submit_button" onClick={ () => Add_Comment() }>Add Comment</button>
                 <br/>
-                <span id="message"></span>
+                <span id={props.hall_name}></span>
                 </h1>
                 <div className="Meals">
                     {
