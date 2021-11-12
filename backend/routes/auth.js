@@ -7,13 +7,28 @@ const secret = process.env.SECRET
 const login_verif = require("../middlewares/login_verif.js")
 
 // Default homepage
-router.get("/", (request, response) => {
-    response.send("wassup")
+router.post("/plan", (request, response) => {
+    
+    if (!request.body.username) {
+        return response.status(422).json({ error: "Please log in to view plan" });
+    }
+
+    user.findOne({username: request.body.username})
+    .then((user) => {
+        if (user) {
+            console.log(user.foods)
+            response.json({ foods: user.foods })
+        } else {
+            response.status(404).json({ error: "Error" });
+            console.log("error here")
+        }       
+    })
+    .catch(error => {
+        console.log(error)
+        console.log("error happens here")
+    })
 })
 
-router.get("/protected", login_verif, (request, response) => {
-    response.send("Access Cranted")
-})
 
 // user signup for POST
 router.post("/signup", (request, response) => {
@@ -80,9 +95,7 @@ router.post("/login", (request, response) => {
 
             response.json(({
                 token: token,
-                user: {
-                    username: username,
-                }
+                username: username
             }))
 
         } else {
