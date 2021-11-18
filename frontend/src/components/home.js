@@ -5,7 +5,7 @@ const Home = () => {
 
     const username = localStorage.username;
 
-    // const Post = () => {
+    
     useEffect(() => {
         fetch("/plan", {
             method: "POST",
@@ -28,12 +28,13 @@ const Home = () => {
             }
         })
     },[]); 
-    // }
-
+    
+    
     const FOOD_MAPPER = (props) => {
         return (
             <h3>
                 {props.foods}
+                <button>Remove Item</button>
             </h3>
         )
     }

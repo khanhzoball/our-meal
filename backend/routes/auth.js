@@ -16,7 +16,7 @@ router.post("/plan", (request, response) => {
     user.findOne({username: request.body.username})
     .then((user) => {
         if (user) {
-            console.log(user.foods)
+            // console.log(user.foods)
             response.json({ foods: user.foods })
         } else {
             response.status(404).json({ error: "Error" });

@@ -16,7 +16,7 @@ const Menu = () => {
             // const response = await fetch("https://michigan-dining-api.tendiesti.me/v1/diningHalls");
             const response = await fetch("https://michigan-dining-api.herokuapp.com/v1/diningHalls");
             const data = await response.json();
-            setHalls(data.diningHalls) ;
+            setHalls(data.diningHalls);
         }
 
         getHallData();

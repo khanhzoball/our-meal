@@ -12,7 +12,7 @@ const Reviews = () => {
                 "Accept":"application/json",
             },
             body: JSON.stringify({
-                hall_name
+                hall_name,
             })
         })
         .then(response => response.json())
@@ -45,7 +45,7 @@ const Reviews = () => {
             <div>
                 {
                     hall_comments_arr.map((halls) => {
-                        return <HALL_REVIEWS_MAPPER reviews = {halls}/>
+                        return <HALL_REVIEWS_MAPPER reviews = {halls} />
                     })
                 }
             </div>

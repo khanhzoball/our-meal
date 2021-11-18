@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 
 const Login = () => {
-    const [username, Username] = useState("");
-    const [password, Password] = useState("");
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
 
     const Post = () => {
         fetch("/login", {
@@ -23,6 +23,8 @@ const Login = () => {
                 message.innerHTML = data.error + "<br/>";
             }
             else {
+                localStorage.setItem("jwt", data.token)
+                localStorage.setItem("username", data.username)
                 window.location.href = './';
             }
         })
@@ -30,9 +32,9 @@ const Login = () => {
 
     return (
         <div>
-            <input type="text" placeholder="username" value={username} onChange={ (e) => Username(e.target.value) }/>
+            <input type="text" placeholder="username" value={username} onChange={ (e) => setUsername(e.target.value) }/>
             <br/>
-            <input type="text" placeholder="password" value={password} onChange={ (e) => Password(e.target.value) }/>
+            <input type="text" placeholder="password" value={password} onChange={ (e) => setPassword(e.target.value) }/>
             <br/>
             <span id="message"></span>
             <button id="submit_button" onClick={ () => Post() }>Log in</button>

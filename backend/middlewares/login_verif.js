@@ -7,7 +7,7 @@ dotenv.config()
 // This module will verify if a user is logged in to view private information
 
 module.exports = (request, response, next) => {
-    const auth_request = request.headers
+    const {auth_request} = request.headers
 
     if (!auth_request)   {
         return response.status(401).json({ error: "Must be logged in to view information"})
