@@ -16,7 +16,7 @@ router.post("/reviews", (request, response) => {
     hall.findOne({name: hall_name})
     .then((saved_hall) => {
         if (saved_hall) {
-            //console.log(saved_hall.comments)
+            console.log(saved_hall.comments)
             response.json({ reviews: saved_hall.comments })
         } else {
             response.status(404).json({ error: "Dining Hall does not exist" });
