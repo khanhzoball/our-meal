@@ -76,14 +76,8 @@ const Menu = () => {
                         if (props.nutritionalInfo.value) {
                             value = props.nutritionalInfo.value
                         }
-                        else {
-                            value = 0
-                        }
                         if (props.nutritionalInfo.units) {
                             units = props.nutritionalInfo.units
-                        }
-                        else {
-                            units = 'g'
                         }
 
                         return (
