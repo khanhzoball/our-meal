@@ -10,7 +10,6 @@ if a package-lock.json file exists, delete it
 
 
 run npm install
-
 once package-lock.json file has been created you can run the project.
 
 
