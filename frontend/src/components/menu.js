@@ -92,6 +92,7 @@ const Menu = () => {
                     
                     console.log(props.menuItem)
 
+                    // Modified this to add nutrional info
                     const Add_to_plan = () => {
                         fetch("/addfood", {
                             method: "POST",

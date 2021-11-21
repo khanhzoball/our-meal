@@ -33,6 +33,7 @@ const Home = () => {
     const FOOD_MAPPER = (props) => {
 
 
+        // Added this nutritional mapper
         const NUTRITION_MAPPER = (props) => {
             var name = props.nutritionalInfo.name
             var value = ""
