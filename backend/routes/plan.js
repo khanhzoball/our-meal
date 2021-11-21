@@ -21,6 +21,7 @@ router.post("/addfood", (request, response) => {
                 {
                     name: request.body.menuItem,
                     nutritionalInfo: request.body.nutritionalInfo
+                    //Added this line here ^ to add nutrional info
                 })
             user.foods = temp
             user.save()
