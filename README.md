@@ -1,6 +1,6 @@
 # our-meal
 
-Instructions on how to run OurMeal
+Instructions on how to run Our-Meal
 
 Open up 2 simultaneous terminal windows
 
@@ -21,4 +21,5 @@ rum npm start in frontend/src
 run node app in backend
 
 App should run on localhost:3000
+
 
