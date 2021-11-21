@@ -17,7 +17,11 @@ router.post("/addfood", (request, response) => {
     .then((user) => {
         if (user) {
             var temp = user.foods
-            temp.push(request.body.menuItem)
+            temp.push(
+                {
+                    name: request.body.menuItem,
+                    nutritionalInfo: request.body.nutritionalInfo
+                })
             user.foods = temp
             user.save()
             response.json({ message: "Food Successfully added!" })
