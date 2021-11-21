@@ -67,30 +67,29 @@ const Menu = () => {
                 
                 const ITEM_MAPPER = (props) => {
 
-                    // class item {
-                    //     constructor() {
-                    //         name
-                    //     }
-                    // }
                     
                     const NUTRITION_MAPPER = (props) => {
                         var name = props.nutritionalInfo.name
                         var value = ""
                         var units = ""
-
+                        
                         if (props.nutritionalInfo.value) {
                             value = props.nutritionalInfo.value
                         }
+                        else {
+                            value = 0
+                        }
                         if (props.nutritionalInfo.units) {
                             units = props.nutritionalInfo.units
+                        }
+                        else {
+                            units = 'g'
                         }
 
                         return (
                             <div> {name + ": " + value + units } </div>
                         )
                     }
-                    
-                    console.log(props.menuItem)
 
                     const Add_to_plan = () => {
                         fetch("/addfood", {
@@ -101,7 +100,6 @@ const Menu = () => {
                             },
                             body: JSON.stringify({
                                 menuItem: props.menuItem.name,
-                                nutritionalInfo: props.menuItem.itemSizes[0].nutritionalInfo,
                                 username: localStorage.username
                             })
                         })
