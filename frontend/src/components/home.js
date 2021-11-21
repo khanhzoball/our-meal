@@ -31,11 +31,40 @@ const Home = () => {
     
     
     const FOOD_MAPPER = (props) => {
+
+
+        const NUTRITION_MAPPER = (props) => {
+            var name = props.nutritionalInfo.name
+            var value = ""
+            var units = ""
+
+            if (props.nutritionalInfo.value) {
+                value = props.nutritionalInfo.value
+            }
+            if (props.nutritionalInfo.units) {
+                units = props.nutritionalInfo.units
+            }
+
+            return (
+                <div> {name + ": " + value + units } </div>
+            )
+        }
+
         return (
-            <h3>
-                {props.foods}
-                <button>Remove Item</button>
-            </h3>
+            <div>
+                <h3>
+                    {
+                        props.foods.name
+                    }
+                    <button>Remove</button>
+                </h3>
+                {            
+                    props.foods.nutritionalInfo.map((nutritionalInfo) => {
+                        return <NUTRITION_MAPPER nutritionalInfo = {nutritionalInfo}/>
+                    })
+                }
+                <br/>
+            </div>
         )
     }
 
