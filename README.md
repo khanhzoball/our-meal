@@ -6,13 +6,9 @@ Open up 2 simultaneous terminal windows
 
 go to frontend in first terminal window
 
-if a package-lock.json file exists, delete it
-
-
 run npm install
 
 once package-lock.json file has been created you can run the project.
-
 
 go to frontend/src in one terminal window and backend in another terminal window
 
