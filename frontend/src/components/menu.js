@@ -6,15 +6,16 @@ var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + ('0' + (to
 
 const Menu = () => {
 
-
-
     var [halls, setHalls] = useState([]);
     
     // Fetching Hall
     useEffect(() => {
         async function getHallData() {
-            // const response = await fetch("https://michigan-dining-api.tendiesti.me/v1/diningHalls");
-            const response = await fetch("https://michigan-dining-api.herokuapp.com/v1/diningHalls");
+
+            // NOTE: TWO URL FOR THE API EXISTS. USE WHAT IS NOT BROKEN.
+
+            const response = await fetch("https://michigan-dining-api.tendiesti.me/v1/diningHalls");
+            // const response = await fetch("https://michigan-dining-api.herokuapp.com/v1/diningHalls");
             const data = await response.json();
             setHalls(data.diningHalls);
         }
@@ -26,10 +27,10 @@ const Menu = () => {
     const HALL_MAPPER = (props) => {
         var [menus, setMenus] = useState([]);
 
-
         //fetching meal
         useEffect(() => {
-            fetch("https://michigan-dining-api.herokuapp.com/v1/menus?date=" + date + "&diningHall=" + props.hall_name.replaceAll(" ", "%20"))
+            fetch("https://michigan-dining-api.tendiesti.me/v1/menus?date=" + date + "&diningHall=" + props.hall_name.replaceAll(" ", "%20"))
+            // fetch("https://michigan-dining-api.herokuapp.com/v1/menus?date=" + date + "&diningHall=" + props.hall_name.replaceAll(" ", "%20"))
             .then( (response) => response.json())
             .then( (resJson) => {
                 if (resJson.menus) {
@@ -47,7 +48,8 @@ const Menu = () => {
 
             //fetching category
             useEffect(() => {
-                fetch("https://michigan-dining-api.herokuapp.com/v1/menus?date=" + date + "&diningHall=" + props.hall_name.replaceAll(" ", "%20") + "&meal=" + props.meal_name.replaceAll(" ", "%20"))
+                fetch("https://michigan-dining-api.tendiesti.me/v1/menus?date=" + date + "&diningHall=" + props.hall_name.replaceAll(" ", "%20") + "&meal=" + props.meal_name.replaceAll(" ", "%20"))
+                // fetch("https://michigan-dining-api.herokuapp.com/v1/menus?date=" + date + "&diningHall=" + props.hall_name.replaceAll(" ", "%20") + "&meal=" + props.meal_name.replaceAll(" ", "%20"))
                 .then( (response) => response.json())
                 .then( (resJson) => {
                     // console.log(resJson)
@@ -175,8 +177,6 @@ const Menu = () => {
             )
         }
 
-
-
         const [comment, setComment] = useState("");
 
         const Add_Comment = () => {
@@ -210,7 +210,7 @@ const Menu = () => {
                 <br/>
                 <button>Upvote</button>
                 <br/>
-                <input type="text" placeholder="comment" value={comment} onChange={ (e) => setComment(e.target.value) }/>
+                <input type="text" placeholder="comment" onChange={ (e) => setComment(e.target.value) }/>
                 <button id="submit_button" onClick={ () => Add_Comment() }>Add Comment</button>
                 <br/>
                 <span id={props.hall_name}></span>
