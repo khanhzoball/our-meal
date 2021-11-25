@@ -19,8 +19,8 @@ router.post("/addfood", (request, response) => {
             var temp = user.foods
             temp.push(
                 {
-                    name: request.body.menuItem,
-                    nutritionalInfo: request.body.nutritionalInfo
+                    name: request.body.menuItem.name,
+                    nutritionalInfo: request.body.menuItem.itemSizes[0].nutritionalInfo
                     //Added this line here ^ to add nutrional info
                 })
             user.foods = temp
