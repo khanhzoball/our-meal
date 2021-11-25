@@ -51,13 +51,38 @@ const Home = () => {
             )
         }
 
+        //added for Remove Button
+        const Remove_from_plan = () => {
+            fetch("/removefood", {
+                method: "POST",
+                headers: {
+                    "Content-Type":"application/json",
+                    "Accept":"application/json",
+                },
+                body: JSON.stringify({
+                    menuItem: props.menuItem.name,
+                    username: localStorage.username
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                let message = document.getElementById(props.menuItem.name)
+                if (data.error) {
+                    message.innerHTML = data.error + "<br/>";
+                }
+                else {
+                    message.innerHTML = data.message + "<br/>";
+                }
+            })
+        }
+
         return (
             <div>
                 <h3>
                     {
                         props.foods.name
                     }
-                    <button>Remove</button>
+                    <button id="submit_button" onClick={ () => Remove_from_plan() }>Remove</button>
                 </h3>
                 {            
                     props.foods.nutritionalInfo.map((nutritionalInfo) => {
