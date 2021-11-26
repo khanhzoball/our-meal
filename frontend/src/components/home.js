@@ -69,11 +69,35 @@ const Home = () => {
         )
     }
 
+        const Clear_All = () => {
+            fetch("/clearall", {
+                method: "POST",
+                headers: {
+                    "Content-Type":"application/json",
+                    "Accept":"application/json",
+                },
+                body: JSON.stringify({
+                    username: localStorage.username
+                })
+            })
+            // .then(response => response.json())
+            // .then(data => {
+            //     let message = document.getElementById(props.menuItem.name)
+            //     if (data.error) {
+            //         message.innerHTML = data.error + "<br/>";
+            //     }
+            //     else {
+            //         message.innerHTML = data.message + "<br/>";
+            //     }
+            // })
+        }
+
 
     return (
         
         <div>
             <h1>Home</h1>
+            <button onClick={ () => Clear_All() }>Clear Plan</button>
             <span id="message"></span>
             <div>
                 {            
