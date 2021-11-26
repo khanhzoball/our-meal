@@ -69,7 +69,8 @@ const Menu = () => {
                 
                 const ITEM_MAPPER = (props) => {
 
-                    
+                    console.log(props.menuItem)
+
                     const NUTRITION_MAPPER = (props) => {
                         var name = props.nutritionalInfo.name
                         var value = ""
@@ -96,7 +97,7 @@ const Menu = () => {
                                 "Accept":"application/json",
                             },
                             body: JSON.stringify({
-                                menuItem: props.menuItem.name,
+                                menuItem: props.menuItem,
                                 username: localStorage.username
                             })
                         })
