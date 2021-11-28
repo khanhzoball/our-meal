@@ -48,16 +48,19 @@ router.post("/removefood", (request, response) => {
     user.findOne({username: request.body.username})
     .then((user) => {
         if (user) {
+            //console.log(user.foods.length)
             var temp = user.foods
-            //not sure if this is the right way to find index of item in array
-            const index = temp.indexOf(
-                {
-                    name: request.body.menuItem.name,
-                    nutritionalInfo: request.body.menuItem.itemSizes[0].nutritionalInfo
-                    //Added this line here ^ to add nutrional info
-                });
+
+            //this probably does not work correctly
+            let index = temp.indexOf({
+                name: request.body.user.name
+            })
+
             temp.splice(index, 1);
             user.foods = temp
+
+            //console.log(user.foods.length)
+
             user.save()
             response.json({ message: "Food Successfully removed!" })
             
@@ -71,6 +74,8 @@ router.post("/removefood", (request, response) => {
         console.log("error happens here")
     })
 })
+
+
 
 
 module.exports = router
