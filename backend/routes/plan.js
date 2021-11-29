@@ -48,18 +48,17 @@ router.post("/removefood", (request, response) => {
     user.findOne({username: request.body.username})
     .then((user) => {
         if (user) {
-            //console.log(user.foods.length)
             var temp = user.foods
+            var index = 0
 
-            //this probably does not work correctly
-            let index = temp.indexOf({
-                name: request.body.user.name
-            })
-
+            for (let i = 0; i < temp.length; i++) {
+                if (temp[i].name == request.body.menuItem.name) {
+                    index = i
+                    break;
+                }
+            }
             temp.splice(index, 1);
             user.foods = temp
-
-            //console.log(user.foods.length)
 
             user.save()
             response.json({ message: "Food Successfully removed!" })
