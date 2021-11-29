@@ -138,17 +138,17 @@ const Home = () => {
                     username: localStorage.username
                 })
             })
-            // .then(response => response.json())
-            // .then(data => {
-            //     // setUpdated(updated + 1)
-            // //     let message = document.getElementById(props.menuItem.name)
-            // //     if (data.error) {
-            // //         message.innerHTML = data.error + "<br/>";
-            // //     }
-            // //     else {
-            // //         message.innerHTML = data.message + "<br/>";
-            // //     }
-            // })
+            .then(response => response.json())
+            .then(data => {
+                setUpdated(updated + 1)
+            //     let message = document.getElementById(props.menuItem.name)
+            //     if (data.error) {
+            //         message.innerHTML = data.error + "<br/>";
+            //     }
+            //     else {
+            //         message.innerHTML = data.message + "<br/>";
+            //     }
+            })
         }
 
 

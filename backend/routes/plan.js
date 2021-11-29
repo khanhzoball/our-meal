@@ -38,6 +38,29 @@ router.post("/addfood", (request, response) => {
     })
 })
 
+router.post("/clearall", (request, response) => {
+    if (!request.body.username) {
+        return response.status(422).json({ error: "Please log in before clearing your plan" });
+    }
+
+    user.findOne({username: request.body.username})
+    .then((user) => {
+        if (user) {
+            user.foods = []
+            user.save()
+            response.json({ message: "Plan successfully cleared" })
+
+        } else {
+            response.status(404).json({ error: "Error" });
+            console.log("error here")
+        }       
+    })
+    .catch(error => {
+        console.log(error)
+        console.log("error happens here")
+    })
+})
+
 //added for Remove Button
 router.post("/removefood", (request, response) => {
     
