@@ -56,8 +56,6 @@ const Menu = () => {
                     if (resJson.menus[0].category) {
                         setCategory(resJson.menus[0].category)
                     }
-                    
-                    
                 })
                 .catch( (error) => {
                     console.log(error);
