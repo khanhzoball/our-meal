@@ -38,17 +38,30 @@ router.post("/addfood", (request, response) => {
     })
 })
 
-router.post("/clearall", (request, response) => {
+//added for Remove Button
+router.post("/removefood", (request, response) => {
+    
     if (!request.body.username) {
-        return response.status(422).json({ error: "Please log in before clearing your plan" });
+        return response.status(422).json({ error: "Please log in to add to plan" });
     }
 
     user.findOne({username: request.body.username})
     .then((user) => {
         if (user) {
-            user.foods = []
+            var temp = user.foods
+            var index = 0
+
+            for (let i = 0; i < temp.length; i++) {
+                if (temp[i].name == request.body.menuItem.name) {
+                    index = i
+                    break;
+                }
+            }
+            temp.splice(index, 1);
+            user.foods = temp
+
             user.save()
-            response.json({ message: "Plan successfully cleared" })
+            response.json({ message: "Food Successfully removed!" })
             
         } else {
             response.status(404).json({ error: "Error" });
@@ -60,5 +73,8 @@ router.post("/clearall", (request, response) => {
         console.log("error happens here")
     })
 })
+
+
+
 
 module.exports = router
