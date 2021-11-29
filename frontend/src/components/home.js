@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 
 const Home = () => {
     const [foods, setFoods] = useState([]);
+    const [updated, setUpdated] = useState(0);
 
     const username = localStorage.username;
 
@@ -27,7 +28,7 @@ const Home = () => {
                 message.innerHTML = resJson.error + "<br/>";
             }
         })
-    },[]); 
+    },[updated]); 
     
     
     const FOOD_MAPPER = (props) => {
@@ -55,31 +56,28 @@ const Home = () => {
 
         //added for Remove Button
         const Remove_from_plan = () => {
-            fetch("/removefood", {
-                method: "POST",
-                headers: {
-                    "Content-Type":"application/json",
-                    "Accept":"application/json",
-                },
-                body: JSON.stringify({
-                    menuItem: props.foods.name,
-                    username: localStorage.username
+                fetch("/removefood", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type":"application/json",
+                        "Accept":"application/json",
+                    },
+                    body: JSON.stringify({
+                        menuItem: props.foods,
+                        username: localStorage.username
+                    })
                 })
-            })
-            /*
-            .then(response => response.json())
-            .then(data => {
-                let message = document.getElementById(props.foods.name)
-                
-                if (data.error) {
-                    message.innerHTML = data.error + "<br/>";
-                }
-                else {
-                    message.innerHTML = data.message + "<br/>";
-                }
-                
-            })
-            */
+                .then(response => response.json())
+                .then(data => {
+                    setUpdated(updated + 1)
+                    // let message = document.getElementById(props.foods.name)
+                    // if (data.error) {
+                    //     message.innerHTML = data.error + "<br/>";
+                    // }
+                    // else {
+                    //     message.innerHTML = data.message + "<br/>";
+                    // }
+                })
         }
 
 
