@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useState, useEffect } from 'react';
 
 var today = new Date();
@@ -67,7 +67,7 @@ const Menu = () => {
                 
                 const ITEM_MAPPER = (props) => {
 
-                    console.log(props.menuItem)
+                    // console.log(props.menuItem)
 
                     const NUTRITION_MAPPER = (props) => {
                         var name = props.nutritionalInfo.name
@@ -176,9 +176,11 @@ const Menu = () => {
             )
         }
 
-        const [comment, setComment] = useState("");
+        
+        const comment = useRef("");
 
         const Add_Comment = () => {
+            console.log(comment.current)
             fetch("/comment", {
                 method: "POST",
                 headers: {
@@ -187,7 +189,7 @@ const Menu = () => {
                 },
                 body: JSON.stringify({
                     hall_name: props.hall_name, 
-                    comment,
+                    comment: comment.current,
                 })
             })
             .then(response => response.json())
@@ -209,7 +211,7 @@ const Menu = () => {
                 <br/>
                 <button>Upvote</button>
                 <br/>
-                <input type="text" placeholder="comment" onChange={ (e) => setComment(e.target.value) }/>
+                <input type="text" placeholder="comment" onChange={ (e) => {comment.current = e.target.value} }/>
                 <button id="submit_button" onClick={ () => Add_Comment() }>Add Comment</button>
                 <br/>
                 <span id={props.hall_name}></span>
