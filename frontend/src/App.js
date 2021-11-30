@@ -7,7 +7,7 @@ import Signup from "./components/signup.js";
 import Login from "./components/login.js";
 import Menu from "./components/menu.js";
 import Reviews from "./components/reviews.js"
-
+import "./components/comp.css";
 
 
 function App() {

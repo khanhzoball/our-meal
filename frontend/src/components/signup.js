@@ -35,7 +35,7 @@ const Signup = () => {
             <input type="text" placeholder="password" value={password} onChange={ (e) => setPassword(e.target.value) }/>
             <br/>
             <span id="message"></span>
-            <button id="submit_button" onClick={ () => Post() }>Sign up</button>
+            <button className="button navopt" id="submit_button" onClick={ () => Post() }>Sign up</button>
         </div>
     )
 }

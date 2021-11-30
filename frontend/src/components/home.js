@@ -112,10 +112,10 @@ const Home = () => {
 
 
         return (
-            <div>
-                <h3>
+            <div className ="daily">
+                <h3 >
                     {props.foods.name}
-                    <button onClick={ () => Remove_from_plan() }>Remove</button>
+                    <button className="button navopt" onClick={ () => Remove_from_plan() }>Remove</button>
                 </h3>
                 {            
                     props.foods.nutritionalInfo.map((nutritionalInfo) => {
@@ -123,7 +123,7 @@ const Home = () => {
                     })
                 }
                 <br/>
-            </div>
+                </div>
         )
     }
 
@@ -155,10 +155,10 @@ const Home = () => {
     
 
     return (
-        <div>
+        <div className ="center">
             <h1>Home</h1>
+            <div className="daily">
             <h3>Daily Total</h3>
-            <div>
                 Calories: {Calories}
                 <br/>
                 Total Fat: {Total_Fat}
@@ -178,10 +178,11 @@ const Home = () => {
                 Sugars: {Sugars}
                 <br/>
                 Protein: {Protein}
+                <br/>
+                <button className="button navopt" onClick={ () => Clear_All() }>Clear Plan</button>
             </div>
-            <button onClick={ () => Clear_All() }>Clear Plan</button>
             <span id="message"></span>
-            <div>
+            <div className="float-container" >
                 {            
                     foods.map((foods) => {
                         return <FOOD_MAPPER foods = {foods}/>

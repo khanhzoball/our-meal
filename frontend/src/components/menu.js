@@ -116,7 +116,7 @@ const Menu = () => {
                             <div>
                                 <h4>
                                 {props.menuItem.name} 
-                                <button id="submit_button" onClick={ () => Add_to_plan() }>Add to Plan</button>
+                                <button className="button navopt" id="submit_button" onClick={ () => Add_to_plan() }>Add to Plan</button>
                                 </h4>
                                 <span id={props.menuItem.name}></span>
                                 <div>
@@ -135,7 +135,7 @@ const Menu = () => {
                             <div>
                                 <h4>
                                 {props.menuItem.name}
-                                <button>Add</button>
+                                <button className="button navopt">Add</button>
                                 </h4>
                             </div>
                         )}
@@ -205,14 +205,14 @@ const Menu = () => {
         }
 
         return (
-            <div>
+            <div className="Halls">
                 <h1>
                 {props.hall_name}
                 <br/>
-                <button>Upvote</button>
+                <button className="button navopt">Upvote</button>
                 <br/>
                 <input type="text" placeholder="comment" onChange={ (e) => {comment.current = e.target.value} }/>
-                <button id="submit_button" onClick={ () => Add_Comment() }>Add Comment</button>
+                <button className="button navopt" id="submit_button" onClick={ () => Add_Comment() }>Add Comment</button>
                 <br/>
                 <span id={props.hall_name}></span>
                 </h1>
@@ -229,7 +229,7 @@ const Menu = () => {
     }
 
     return (
-        <div className="Halls">
+        <div>
             {
                 halls.map(halls => 
                 {
