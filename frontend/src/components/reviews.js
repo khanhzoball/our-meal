@@ -94,6 +94,7 @@ const Reviews = () => {
             }
             else {
                 sethall_comments_arr(resJson.reviews)
+                message.innerHTML = "";
             }
         })
     }
