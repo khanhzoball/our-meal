@@ -1,8 +1,8 @@
 import React, { useRef } from "react";
 import { useState, useEffect } from 'react';
-
+import up from "./assets/up.png"
 var today = new Date();
-var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + ('0' + (today.getDate() + 1)).slice(-2);
+var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + ('0' + (today.getDate())).slice(-2);
 
 const Menu = () => {
 
@@ -206,17 +206,17 @@ const Menu = () => {
 
         return (
             <div className="Halls">
-                <h1>
+                <h2>
                 {props.hall_name}
                 <br/>
-                <button className="button navopt">Upvote</button>
+                <button className="upvote"><img src={up} className="upvote"></img></button>
                 <br/>
                 <input type="text" placeholder="comment" onChange={ (e) => {comment.current = e.target.value} }/>
                 <button className="button navopt" id="submit_button" onClick={ () => Add_Comment() }>Add Comment</button>
                 <br/>
                 <span id={props.hall_name}></span>
-                </h1>
-                <div className="Meals">
+                </h2>
+                <div className="hallName">
                     {
                         menus.map(menus => 
                         {
