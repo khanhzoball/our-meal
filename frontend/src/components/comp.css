@@ -1,5 +1,6 @@
 .topnav{
     background-color: #0f4d92;
+<<<<<<< HEAD
     color:black;
 }
 .button {
@@ -57,12 +58,48 @@ input[type=text] {
   }
 
 
+=======
+    font-family: Arial, Helvetica, sans-serif;
+    color:white;
+    padding: 30px;
+
+}
+.logsign
+{
+    padding: 6px;
+    border-radius: 4px;
+    background-color: rgb(5, 194, 106);
+    float: right;
+
+}
+.resize{
+    height: 40px;
+    width: auto;
+}
+.menu
+{
+    padding: 6px;
+    border-radius: 4px;
+    margin: 0px;
+    background: rgb(250, 59, 11);
+    position: absolute;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%) 
+}
+>>>>>>> ff04fc386aa24f4eebe63069f963f6fb2044979c
 .Halls{
     padding: 10px;
     border-radius: 6px;
     display: flex;
     background-color: #0f4d92;
     margin: 15px;
+<<<<<<< HEAD
+=======
+    align-items: center;
+    position:absolute;
+    flex-wrap: wrap;
+>>>>>>> ff04fc386aa24f4eebe63069f963f6fb2044979c
 
 }
 .hallName
@@ -75,6 +112,7 @@ input[type=text] {
     align-items: center;
     background-color: lightblue;
 
+<<<<<<< HEAD
 }
 .comments
 {
@@ -85,4 +123,6 @@ input[type=text] {
 }
 .textgrid{
     border:tomato;
+=======
+>>>>>>> ff04fc386aa24f4eebe63069f963f6fb2044979c
 }
