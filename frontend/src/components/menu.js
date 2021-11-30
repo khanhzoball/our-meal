@@ -119,7 +119,7 @@ const Menu = () => {
                                 <button className="button navopt" id="submit_button" onClick={ () => Add_to_plan() }>Add to Plan</button>
                                 </h4>
                                 <span id={props.menuItem.name}></span>
-                                <div>
+                                <div className ="info">
                                     {
                                         props.menuItem.itemSizes[0].nutritionalInfo.map(nutritionalInfo =>
                                             {
@@ -160,7 +160,7 @@ const Menu = () => {
             }
             
             return (
-                <div>
+                <div className="float-pointer">
                     <h2>
                     {props.meal_name}
                     </h2>
@@ -203,26 +203,76 @@ const Menu = () => {
                 }
             })
         }
+        const [likes, setLikes] = useState(0)
+
+        useEffect(() => {
+            fetch("/retrievelikes", {
+                method: "POST",
+                headers: {
+                    "Content-Type":"application/json",
+                    "Accept":"application/json",
+                },
+                body: JSON.stringify({
+                    hall_name: props.hall_name, 
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                let message = document.getElementById(props.hall_name)
+                if (data.error) {
+                    message.innerHTML = data.error + "<br/>";
+                }
+                else {
+                    setLikes(data.likes)
+                }
+            })
+        },[]); 
+
+        const Like = () => {
+            fetch("/like", {
+                method: "POST",
+                headers: {
+                    "Content-Type":"application/json",
+                    "Accept":"application/json",
+                },
+                body: JSON.stringify({
+                    hall_name: props.hall_name, 
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                let message = document.getElementById(props.hall_name)
+                if (data.error) {
+                    message.innerHTML = data.error + "<br/>";
+                }
+                else {
+                    message.innerHTML = data.message + "<br/>";
+                    setLikes(data.likes)
+                }
+            })
+        }
 
         return (
             <div className="Halls">
                 <h2>
                 {props.hall_name}
                 <br/>
-                <button className="upvote"><img src={up} className="upvote"></img></button>
+                <button className="upvote" onClick={ () => Like() }><img src={up} className="upvote"></img></button>
                 <br/>
                 <input type="text" placeholder="comment" onChange={ (e) => {comment.current = e.target.value} }/>
                 <button className="button navopt" id="submit_button" onClick={ () => Add_Comment() }>Add Comment</button>
                 <br/>
                 <span id={props.hall_name}></span>
                 </h2>
-                <div className="hallName">
-                    {
-                        menus.map(menus => 
+                <div className="flaot-container">
+                    <div className="hallName">
                         {
-                            return <MENU_MAPPER meal_name = {menus.meal} hall_name = {props.hall_name}/>
-                        })
-                    }
+                            menus.map(menus => 
+                            {
+                                return <MENU_MAPPER meal_name = {menus.meal} hall_name = {props.hall_name}/>
+                            })
+                        }
+                    </div>
                 </div>
             </div>
         )
