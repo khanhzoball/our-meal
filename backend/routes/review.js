@@ -52,5 +52,55 @@ router.post("/comment", (request, response) => {
     })
 
 })
+router.post("/like", (request, response) => {
+    const hall_name = request.body.hall_name
+
+    if (!hall_name) {
+        response.status(422).json({ error: "Please add all fields" })
+    }
+
+    hall.findOne({name: hall_name})
+    .then((saved_hall) => {
+        if (saved_hall) {
+            var temp = saved_hall.likes
+            temp += 1
+            saved_hall.likes = temp
+            saved_hall.save()
+            response.json({
+                likes: temp,
+                message: "Liked!",
+            })
+        } else {
+            response.status(404).json({ error: "Dining Hall does not exist" });
+        }
+    })
+    .catch(error => {
+        console.log(error)
+    })
+})
+
+router.post("/retrievelikes", (request, response) => {
+    const hall_name = request.body.hall_name
+
+    if (!hall_name) {
+        response.status(422).json({ error: "Please add all fields" })
+    }
+
+    hall.findOne({name: hall_name})
+    .then((saved_hall) => {
+        if (saved_hall) {
+            var temp = saved_hall.likes
+            response.json({
+                likes: temp,
+                
+            })
+        } else {
+            response.status(404).json({ error: "Dining Hall does not exist" });
+        }
+    })
+    .catch(error => {
+        console.log(error)
+    })
+})
 
 module.exports = router
