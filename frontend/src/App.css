@@ -1,16 +1,4 @@
 a{
-<<<<<<< HEAD
   font-size: 20px; 
-=======
-  font-size: 20px;
-
-}
-a:link{
-  color: whitesmoke;
-  text-decoration: none;
-}
-a:visited{
-  color: whitesmoke;
->>>>>>> ff04fc386aa24f4eebe63069f963f6fb2044979c
   text-decoration: none;
 }
