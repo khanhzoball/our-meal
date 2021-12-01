@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-
+import Chart from "react-google-charts";
 
 
 const Home = () => {
+    const [visible, setVisible] = React.useState(false);
     const [foods, setFoods] = useState([]);
     const [updated, setUpdated] = useState(0);
     var Calories = 0
@@ -112,7 +113,7 @@ const Home = () => {
 
 
         return (
-            <div className ="daily">
+            <div className ="daily ib">
                 <h3 >
                     {props.foods.name}
                     <button className="button navopt" onClick={ () => Remove_from_plan() }>Remove</button>
@@ -157,6 +158,7 @@ const Home = () => {
     return (
         <div className ="center">
             <h1>Home</h1>
+            <div className="flexer">
             <div className="daily">
             <h3>Daily Total</h3>
                 Calories: {Calories}
@@ -181,14 +183,51 @@ const Home = () => {
                 <br/>
                 <button className="button navopt" onClick={ () => Clear_All() }>Clear Plan</button>
             </div>
+            <div className = "center">
+                <button className="button navopt" onClick={() => setVisible(!visible)}>
+                    {visible ? 'Hide': 'Show Graph'}
+                </button>
+                {visible && <div>
+                    
+                <Chart
+                width={'500px'}
+                height={'400px'}
+                chartType="PieChart"
+                loader={<div>Loading Chart</div>}
+                data={[
+                    ['Nutrition', 'Value'],
+                    ['Calories', Calories],
+                    ['Total Fat', Total_Fat],
+                    ['Saturated Fat', Saturated_Fat],
+                    ['Trans Fat', Trans_Fat],
+                    ['Cholesterol', Cholesterol],
+                    ['Sodium', Sodium],
+                    ['Total Carbohydrate', Total_Carbohydrate],
+                    ['Dietary Fiber', Dietary_Fiber],
+                    ['Sugars', Sugars],
+                    ['Protein', Protein],
+                ]}
+                options={{
+                    title: 'Daily Total',
+                    backgroundColor: 'transparent',
+                    
+                }}
+                rootProps={{ 'data-testid': '1' }}
+                />
+                    </div>}
+            </div>
+            </div>
             <span id="message"></span>
-            <div className="float-container" >
+            <div className="ib" >
                 {            
                     foods.map((foods) => {
                         return <FOOD_MAPPER foods = {foods}/>
                     })
                 }
             </div>
+            
+
+            
         </div>
     )
 }

@@ -1,6 +1,11 @@
 .topnav{
     background-color: #0f4d92;
     color:black;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index:1;
+
 }
 .button {
     background-color: #FFCB05;
@@ -9,7 +14,8 @@
     padding: 5px 8px;
     text-align: center;
     text-decoration: none;
-    display: inline-block;
+    display: inline;
+    
 
   }
 .navopt
@@ -36,9 +42,21 @@
     margin: auto;
     width: 16%;
     text-align: center;
+    
 }
 .float-container {
-    display: flex;    
+    display:flex;    
+}
+.ib{
+    display: inline-block;
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+.info{
+display: none;
+}
+.info:hover{
+    display:block
 }
 .upvote{
     width: 30px;
@@ -78,11 +96,13 @@ input[type=text] {
 .hallName
 {
     padding: 10px;
-    margin-left: 10px;
-    margin-right: 10px;
+    border-radius: 6px;
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
     background-color: lightblue;
 
+}
+
+.flexer
+{
+    display: flex;
 }
