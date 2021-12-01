@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { React, useState } from "react";
 
 const Login = () => {
     const [username, setUsername] = useState("");
@@ -14,21 +14,20 @@ const Login = () => {
             body: JSON.stringify({
                 username,
                 password,
-            })
+            }),
         })
-        .then(response => response.json())
-        .then(data => {
-            var message = document.getElementById("message")
-            if (data.error) {
-                message.innerHTML = data.error + "<br/>";
+        .then( (response) => response.json())
+        .then( (resJson) => {
+            let message = document.getElementById("message");
+            if (resJson.error) {
+                message.innerHTML = resJson.error + "<br/>";
             }
             else {
-                localStorage.setItem("jwt", data.token)
-                localStorage.setItem("username", data.username)
+                localStorage.setItem("username", resJson.username);
                 window.location.href = './';
-            }
-        })
-    }
+            };
+        });
+    };
 
     return (
         <div>
@@ -39,7 +38,7 @@ const Login = () => {
             <span id="message"></span>
             <button className="button navopt" id="submit_button" onClick={ () => Post() }>Log in</button>
         </div>
-    )
-}
+    );
+};
 
-export default Login
+export default Login;

@@ -1,6 +1,7 @@
-import React from "react"
-import {Link} from "react-router-dom"
-import logo from "./assets/logo.png"
+import React from "react";
+import { Link } from "react-router-dom";
+import logo from "./assets/logo.png";
+
 const Navbar = () => {
     return(
         <nav>
@@ -13,7 +14,7 @@ const Navbar = () => {
                 <Link to="/signup" className="navopt">Signup</Link> 
             </div>
         </nav>
-    )
-}
+    );
+};
 
-export default Navbar
+export default Navbar;

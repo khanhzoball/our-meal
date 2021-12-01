@@ -1,33 +1,29 @@
-const express = require("express")
-const mongoose = require("mongoose")
-const user = mongoose.model("user")
-const jwt = require("jsonwebtoken")
-const router = express.Router()
-const secret = process.env.SECRET
-const login_verif = require("../middlewares/login_verif.js")
+const express = require("express");
+const mongoose = require("mongoose");
+
+const router = express.Router();
+const user = mongoose.model("user");
+
 
 // Default homepage
 router.post("/plan", (request, response) => {
-    
-    if (!request.body.username) {
-        return response.status(422).json({ error: "Please log in to view plan" });
-    }
+    const username = request.body.username
+    if (!username) {
+        return response.status(422).json({ error: "Please log in to view plan." });
+    };
 
-    user.findOne({username: request.body.username})
-    .then((user) => {
+    user.findOne({username: username})
+    .then( (user) => {
         if (user) {
-            // console.log(user.foods)
-            response.json({ foods: user.foods })
+            response.json({ foods: user.foods });
         } else {
-            response.status(404).json({ error: "Error" });
-            console.log("error here")
-        }       
+            response.status(404).json({ error: "User not found." });
+        };
     })
-    .catch(error => {
-        console.log(error)
-        console.log("error happens here")
-    })
-})
+    .catch( (error) => {
+        console.log(error);
+    });
+});
 
 
 // user signup for POST
@@ -37,31 +33,30 @@ router.post("/signup", (request, response) => {
 
     // If missing a field: error
     if (!username || !password) {
-        response.status(422).json({ error: "Please add all fields" })
-    }
+        response.status(422).json({ error: "Please add all fields." });
+    };
 
     // Checks if there already exists an account with that username
     user.findOne({ username: username })
-    .then ((saved_user) => {
+    .then ( (saved_user) => {
         if (saved_user) {
-            return response.status(422).json({ error: "There already exists an account with that username" })
-        }
+            return response.status(422).json({ error: "There already exists an account with that username." });
+        };
         // Creates a new user and saves the account
-        const new_user = new user({ username, password })
+        const new_user = new user({ username, password });
 
         new_user.save()
-        .then(() => {
-            response.json({ message: "Account Saved Sucessfully" })
+        .then( () => {
+            response.json({ message: "Account Saved Sucessfully." });
         })
-        .catch(error => {
-            console.log(error)
-        })
+        .catch( (error) => {
+            console.log(error);
+        });
     })
-    .catch(error => {
-        console.log(error)
-    })
-
-})
+    .catch( (error) => {
+        console.log(error);
+    });
+});
 
 // user log in for POST
 router.post("/login", (request, response) => {
@@ -70,41 +65,29 @@ router.post("/login", (request, response) => {
 
     // Checks if missing a field
     if (!username || !password) {
-        response.status(422).json({ error: "Please include both username and password" })
-    }
+        response.status(422).json({ error: "Please include both username and password." });
+    };
 
     user.findOne({ username: username })
-    .then ((saved_user) => {
+    .then ( (saved_user) => {
         
         // If username doesn't exist: error
         if (!saved_user) {
-            return response.status(422).json({ error: "Invalid username or password" })
+            return response.status(422).json({ error: "Invalid username or password." });
         }
         // Logs in if username and password matches
         // Generates a token that allows user to access private information
         else if (saved_user.password == password) {
-            const token = jwt.sign({ _id: saved_user._id }, secret)
-
-            // For testing purposes
-            console.log(JSON.stringify({
-                token: token,
-                user: {
-                    username: username,
-                }
-            }))
-
-            response.json(({
-                token: token,
-                username: username
-            }))
-
+            response.json({
+                username: username,
+            });
         } else {
-            return response.status(422).json({ error: "Invalid username or password" })
-        }
+            return response.status(422).json({ error: "Invalid username or password." });
+        };
     })
-    .catch(error => {
+    .catch( (error) => {
         console.log(error)
-    })
-})
+    });
+});
 
-module.exports = router
+module.exports = router;

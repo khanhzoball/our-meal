@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { React, useState } from "react";
 
 const Signup = () => {
     const [username, setUsername] = useState("");
@@ -14,19 +14,19 @@ const Signup = () => {
             body: JSON.stringify({
                 username,
                 password,
-            })
+            }),
         })
-        .then(response => response.json())
-        .then(data => {
-            let message = document.getElementById("message")
-            if (data.error) {
-                message.innerHTML = data.error + "<br/>";
+        .then( (response) => response.json())
+        .then( (resJson) => {
+            let message = document.getElementById("message");
+            if (resJson.error) {
+                message.innerHTML = resJson.error + "<br/>";
             }
             else {
-                message.innerHTML = data.message + "<br/>";
-            }
-        })
-    }
+                message.innerHTML = resJson.message + "<br/>";
+            };
+        });
+    };
 
     return (
         <div>
@@ -37,7 +37,7 @@ const Signup = () => {
             <span id="message"></span>
             <button className="button navopt" id="submit_button" onClick={ () => Post() }>Sign up</button>
         </div>
-    )
-}
+    );
+};
 
-export default Signup
+export default Signup;

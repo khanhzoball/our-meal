@@ -1,27 +1,11 @@
-import React, { useState, useEffect } from "react";
+import { React, useState } from "react";
 import Select from 'react-select';
 
 
 const Reviews = () => {
     const [hall_name, sethall_name] = useState("");
     const [hall_comments_arr, sethall_comments_arr] = useState([]);
-    /*
-    let options1 = [];
-
-    useEffect(() => {
-    async function copyOptionsForAsync() {
-        const response = await fetch("https://michigan-dining-api.tendiesti.me/v1/diningHalls");
-        // const response = await fetch("https://michigan-dining-api.herokuapp.com/v1/diningHalls");
-        const data = await response.json();
-        for(let i = 0; i < data.length; i++)
-            {
-                let opt = { label: data[i].diningHalls.name};
-                options1.push(opt);
-            }
-      }
-      copyOptionsForAsync();
-    },[]); 
-    <Select name="revlist" placeholder = "Select Dining Hall" options={options1} />*/
+    
     const hall_options = [
         { value: "aa", label: "Baits Em Mgifts" },
         { value: "ab", label: "Berts Cafe" },
@@ -71,8 +55,8 @@ const Reviews = () => {
         { value: "bt", label: "Twigs At Oxford" },
         { value: "bu", label: "Ugos League" },
         { value: "bv", label: "Ugos Union" },
-        { value: "bw", label: "Umma Cafe" }
-      ];
+        { value: "bw", label: "Umma Cafe" },
+    ];
     
     const Post = () => {
         fetch("/reviews", {
@@ -83,29 +67,29 @@ const Reviews = () => {
             },
             body: JSON.stringify({
                 hall_name,
-            })
+            }),
         })
-        .then(response => response.json())
-        .then(resJson => {
-            console.log(resJson)
-            let message = document.getElementById("message")
+        .then( (response) => response.json())
+        .then( (resJson) => {
+            let message = document.getElementById("message");
             if (resJson.error) {
                 message.innerHTML = resJson.error + "<br/>";
             }
             else {
-                sethall_comments_arr(resJson.reviews)
-                message.innerHTML = "";
-            }
-        })
-    }
+                sethall_comments_arr(resJson.reviews);
+                message.innerHTML = "";;
+            };
+        });
+    };
 
     const HALL_REVIEWS_MAPPER = (props) => {
         return (
             <h3>
                 {props.reviews}
             </h3>
-        )
-    }
+        );
+    };
+
     return (
         <div>
             <Select
@@ -125,7 +109,7 @@ const Reviews = () => {
                 }
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default Reviews
+export default Reviews;

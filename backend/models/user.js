@@ -17,8 +17,8 @@ const userSchema = new mongoose.Schema({
     },
     likedhalls: {
         type: Array,
-        required: true
-    }
-})
+        required: true,
+    },
+});
 
-mongoose.model("user", userSchema)
+mongoose.model("user", userSchema);
