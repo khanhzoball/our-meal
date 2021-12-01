@@ -115,9 +115,9 @@ const Menu = () => {
                         return (
                             <div>
                                 <h4 className="mealname">
-                                {props.menuItem.name} 
-                                <button className="button navopt" id="submit_button" onClick={ () => Add_to_plan() }>Add to Plan</button>
+                                {props.menuItem.name}  
                                 </h4>
+                                <button className="button navopt" id="submit_button" onClick={ () => Add_to_plan() }>Add to Plan</button>
                                 <span id={props.menuItem.name}></span>
                                 <div className ="info">
                                     {
@@ -269,7 +269,7 @@ const Menu = () => {
                 <br/>
                 <span id={props.hall_name}></span>
                 </h2>
-                <div className="ib">
+                
                     <div className="hallName">
                         {
                             menus.map(menus => 
@@ -279,7 +279,7 @@ const Menu = () => {
                         }
                     </div>
                 </div>
-            </div>
+            
         )
     }
 
