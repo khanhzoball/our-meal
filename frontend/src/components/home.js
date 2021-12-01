@@ -217,6 +217,7 @@ const Home = () => {
                     </div>}
             </div>
             </div>
+            <br/>
             <span id="message"></span>
             <div className="ib" >
                 {            
