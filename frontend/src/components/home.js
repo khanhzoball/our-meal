@@ -19,6 +19,10 @@ const Home = () => {
 
     const username = localStorage.username;
 
+    const log_out = () => {
+        delete localStorage.username
+        window.location.href = './';
+    }
     
     useEffect(() => {
         fetch("/plan", {
@@ -119,7 +123,7 @@ const Home = () => {
                     <button className="button navopt" onClick={ () => Remove_from_plan() }>Remove</button>
                 </h3>
                 {            
-                    props.foods.nutritionalInfo.map((nutritionalInfo) => {
+                    props.foods.nutritionalInfo.slice(0,10).map((nutritionalInfo) => {
                         return <NUTRITION_MAPPER nutritionalInfo = {nutritionalInfo}/>
                     })
                 }
@@ -158,6 +162,9 @@ const Home = () => {
     return (
         <div className ="center">
             <h1>Home</h1>
+            <h2>
+                <button onClick = {() => {log_out()}}>Log out</button>
+            </h2>
             <div className ="ib2">
             <div className="d2">
             <h3>Daily Total</h3>
