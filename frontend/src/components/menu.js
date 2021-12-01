@@ -150,9 +150,10 @@ const Menu = () => {
                         {
                             props.category.menuItem.map(menuItem => 
                             {
+                                console.log(menuItem);
                                 return <ITEM_MAPPER menuItem = {menuItem}/>
                             })
-                        },
+                        }
                         </div>
                     </div>
 
@@ -203,8 +204,7 @@ const Menu = () => {
                 }
             })
         }
-        const [likes, setLikes] = useState(0)
-
+        const likes = useRef(0);
         useEffect(() => {
             fetch("/retrievelikes", {
                 method: "POST",
@@ -223,7 +223,7 @@ const Menu = () => {
                     message.innerHTML = data.error + "<br/>";
                 }
                 else {
-                    setLikes(data.likes)
+                    
                 }
             })
         },[]); 
@@ -247,24 +247,28 @@ const Menu = () => {
                 }
                 else {
                     message.innerHTML = data.message + "<br/>";
-                    setLikes(data.likes)
+                    likes.current = data.likes;
                 }
             })
         }
+        
 
         return (
             <div className="Halls">
                 <h2>
                 {props.hall_name}
                 <br/>
+                <div>{likes.current}
+                </div>
                 <button className="upvote" onClick={ () => Like() }><img src={up} className="upvote"></img></button>
+
                 <br/>
                 <input type="text" placeholder="comment" onChange={ (e) => {comment.current = e.target.value} }/>
                 <button className="button navopt" id="submit_button" onClick={ () => Add_Comment() }>Add Comment</button>
                 <br/>
                 <span id={props.hall_name}></span>
                 </h2>
-                <div className="flaot-container">
+                <div className="float-container">
                     <div className="hallName">
                         {
                             menus.map(menus => 
