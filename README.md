@@ -13,6 +13,6 @@ go to frontend/src in one terminal window and backend in second terminal window
 
 rum "npm start" in frontend/src
 
-run "node app.js" or nodemon app.js
+run "node app.js" or nodemon app.js in backend
 
 App should run on localhost:3000
