@@ -223,7 +223,7 @@ const Menu = () => {
                     message.innerHTML = data.error + "<br/>";
                 }
                 else {
-                    
+                    likes.current = data.likes
                 }
             })
         },[]); 
@@ -236,7 +236,8 @@ const Menu = () => {
                     "Accept":"application/json",
                 },
                 body: JSON.stringify({
-                    hall_name: props.hall_name, 
+                    hall_name: props.hall_name,
+                    username: localStorage.username,
                 })
             })
             .then(response => response.json())
@@ -252,46 +253,108 @@ const Menu = () => {
             })
         }
         
+        const [view, setView] = useState(0)
 
-        return (
-            <div className="Halls">
-                <h2>
-                {props.hall_name}
-                <br/>
-                {likes.current}
-                <button className="upvote" onClick={ () => Like() }><img src={up} className="upvote"></img></button>
+        const view_menu = () => {
+            setView(!view)
+            // useEffect(() => {
 
-                <br/>
-                <input type="text" placeholder="comment" onChange={ (e) => {comment.current = e.target.value} }/>
-                <br/>
-                <button className="button navopt" id="submit_button" onClick={ () => Add_Comment() }>Add Comment</button>
-                <br/>
-                <span id={props.hall_name}></span>
-                </h2>
-                
-                    <div className="hallName">
-                        {
-                            menus.map(menus => 
+            // },[])
+        }
+
+        if (view) {
+            return (
+                <div className="Halls">
+                    <h2>
+                    {props.hall_name}
+                    
+                    <br/>
+                    {likes.current}
+                    <button className="upvote" onClick={ () => Like() }><img src={up} className="upvote"></img></button>
+                    <br/>
+                    <input type="text" placeholder="comment" onChange={ (e) => {comment.current = e.target.value} }/>
+                    <br/>
+                    <button className="button navopt" id="submit_button" onClick={ () => Add_Comment() }>Add Comment</button>
+                    <button className="viewmenu" onClick={ () => view_menu() }>view_menu</button>
+                    <br/>
+                    <span id={props.hall_name}></span>
+                    </h2>
+                    
+                        <div className="hallName">
                             {
-                                return <MENU_MAPPER meal_name = {menus.meal} hall_name = {props.hall_name}/>
-                            })
-                        }
-                    </div>
+                                menus.map(menus => 
+                                {
+                                    return <MENU_MAPPER meal_name = {menus.meal} hall_name = {props.hall_name}/>
+                                })
+                            }
+                        </div>
                 </div>
-            
-        )
+                
+            )            
+        } else {
+            return (
+                <div className="Halls">
+                    <h2>
+                    {props.hall_name}
+                    
+                    <br/>
+                    {likes.current}
+                    <button className="upvote" onClick={ () => Like() }><img src={up} className="upvote"></img></button>
+                    <br/>
+                    <input type="text" placeholder="comment" onChange={ (e) => {comment.current = e.target.value} }/>
+                    <br/>
+                    <button className="button navopt" id="submit_button" onClick={ () => Add_Comment() }>Add Comment</button>
+                    <button className="viewmenu" onClick={ () => view_menu() }>view_menu</button>
+                    <br/>
+                    <span id={props.hall_name}></span>
+                    </h2>
+                </div>     
+            )
+        }
     }
 
-    return (
-        <div>
-            {
-                halls.map(halls => 
+    // Sorts Halls
+    const sorted_halls = halls.slice().sort((a, b) => {
+        let x = a.name
+        let y = b.name
+        return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+    })
+
+    const [sort, setSort] = useState(0)
+
+    const sort_halls = () => {
+        setSort(!sort)
+        // useEffect(() => {
+
+        // },[])
+    }
+
+    if (sort) {
+        return (
+            
+            <div> 
+                <button onClick={ () => sort_halls() }>Sort Halls</button>
                 {
-                    return <HALL_MAPPER hall_name = {halls.name} hall_id = {halls.id}/>
-                })
-            }
-        </div>
-    )
+                    sorted_halls.map(halls => 
+                    {
+                        return <HALL_MAPPER hall_name = {halls.name} hall_id = {halls.id}/>
+                    })
+                }
+            </div>
+        )
+    } else {
+        return (
+            <div>
+                <button onClick={ () => sort_halls() }>Sort Halls</button>
+                {
+                    halls.map(halls => 
+                    {
+                        return <HALL_MAPPER hall_name = {halls.name} hall_id = {halls.id}/>
+                    })
+                }
+            </div>
+        )
+    }
 }
 /////////////////////////////////////////
 
