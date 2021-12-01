@@ -7,7 +7,7 @@ Open up 2 simultaneous terminal windows
 
 go to frontend in first terminal window
 
-run npm update
+run "npm update"
 
 go to frontend/src in one terminal window and backend in another terminal window
 
