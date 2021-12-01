@@ -98,6 +98,9 @@ const Home = () => {
             .then((response) => response.json())
             .then( (resJson) => {
                 setUpdated(updated + 1)
+            })
+            .catch( (error) => {
+                console.log(error);
             });
         };
 
@@ -140,6 +143,9 @@ const Home = () => {
             //     else {
             //         message.innerHTML = data.message + "<br/>";
             //     }
+            })
+            .catch( (error) => {
+                console.log(error);
             });
         };
 
@@ -148,72 +154,74 @@ const Home = () => {
 
     return (
         <div className ="center">
-            <h1>Home</h1>
+            <h1 className="txtcolor">Home</h1>
             <h2>
-                <button onClick = { () => Log_Out() }>Log out</button>
+                <button className="button navopt"onClick = { () => Log_Out() }>Log out</button>
             </h2>
             <div className ="ib2">
-            <div className="d2">
-            <h3>Daily Total</h3>
-                Calories: {Calories}
+                <div className="d2">
+                    <h3>Daily Total</h3>
+                    Calories: {Calories}
+                    <br/>
+                    Total Fat: {Total_Fat}
+                    <br/>
+                    Saturated Fat: {Saturated_Fat}
+                    <br/>
+                    Trans Fat: {Trans_Fat}
+                    <br/>
+                    Cholesterol: {Cholesterol}
+                    <br/>
+                    Sodium: {Sodium}
+                    <br/>
+                    Total Carbohydrate: {Total_Carbohydrate}
+                    <br/>
+                    Dietary Fiber: {Dietary_Fiber}
+                    <br/>
+                    Sugars: {Sugars}
+                    <br/>
+                    Protein: {Protein}
+                    <br/>
+                    <button className="button navopt" onClick={ () => Clear_All() }>Clear Plan</button>
+                </div>
+                <div className = "center">
+                    <br/>
+                    <button className="button navopt" onClick={() => setVisible(!visible)}>
+                        {visible ? 'Hide': 'Show Graph'}
+                    </button>
+                    {visible && <div>
+                        
+                    <Chart
+                    width={'500px'}
+                    height={'400px'}
+                    chartType="PieChart"
+                    loader={<div>Loading Chart</div>}
+                    data={[
+                        ['Nutrition', 'Value'],
+                        ['Total Fat', Total_Fat],
+                        ['Saturated Fat', Saturated_Fat],
+                        ['Trans Fat', Trans_Fat],
+                        ['Cholesterol', Cholesterol],
+                        ['Sodium', Sodium],
+                        ['Total Carbohydrate', Total_Carbohydrate],
+                        ['Dietary Fiber', Dietary_Fiber],
+                        ['Sugars', Sugars],
+                        ['Protein', Protein],
+                    ]}
+                    options={{
+                        title: 'Daily Total',
+                        backgroundColor: 'transparent',
+                        legend: {
+                            textStyle: { color: 'white' },
+                        },
+                    }}
+                    rootProps={{ 'data-testid': '1' }}
+                    />
+                        </div>}
+                </div>
                 <br/>
-                Total Fat: {Total_Fat}
-                <br/>
-                Saturated Fat: {Saturated_Fat}
-                <br/>
-                Trans Fat: {Trans_Fat}
-                <br/>
-                Cholesterol: {Cholesterol}
-                <br/>
-                Sodium: {Sodium}
-                <br/>
-                Total Carbohydrate: {Total_Carbohydrate}
-                <br/>
-                Dietary Fiber: {Dietary_Fiber}
-                <br/>
-                Sugars: {Sugars}
-                <br/>
-                Protein: {Protein}
-                <br/>
-                <button className="button navopt" onClick={ () => Clear_All() }>Clear Plan</button>
-            </div>
-            <div className = "center">
-                <button className="button navopt" onClick={() => setVisible(!visible)}>
-                    {visible ? 'Hide': 'Show Graph'}
-                </button>
-                {visible && <div>
-                    
-                <Chart
-                width={'500px'}
-                height={'400px'}
-                chartType="PieChart"
-                loader={<div>Loading Chart</div>}
-                data={[
-                    ['Nutrition', 'Value'],
-                    ['Total Fat', Total_Fat],
-                    ['Saturated Fat', Saturated_Fat],
-                    ['Trans Fat', Trans_Fat],
-                    ['Cholesterol', Cholesterol],
-                    ['Sodium', Sodium],
-                    ['Total Carbohydrate', Total_Carbohydrate],
-                    ['Dietary Fiber', Dietary_Fiber],
-                    ['Sugars', Sugars],
-                    ['Protein', Protein],
-                ]}
-                options={{
-                    title: 'Daily Total',
-                    backgroundColor: 'transparent',
-                    legend: {
-                        textStyle: { color: 'white' },
-                    },
-                }}
-                rootProps={{ 'data-testid': '1' }}
-                />
-                    </div>}
-            </div>
-            </div>
+                </div>
             <br/>
-            <span id="message"></span>
+            <span className="txtcolor increase"id="message"></span>
             <div className="ib" >
                 {            
                     foods.map( (foods) => {

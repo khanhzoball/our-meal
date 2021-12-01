@@ -79,6 +79,9 @@ const Reviews = () => {
                 sethall_comments_arr(resJson.reviews);
                 message.innerHTML = "";;
             };
+        })
+        .catch( (error) => {
+            console.log(error);
         });
     };
 
@@ -99,9 +102,9 @@ const Reviews = () => {
             />
             <br/>
             
-            <span className="com" id="message"></span>
+            <span  id="message"></span>
             <button className="button navopt" id="submit_button" onClick={ () => Post() }>View Reviews</button>
-            <div>
+            <div className="txtcolor increase">
                 {
                     hall_comments_arr.map((halls) => {
                         return <HALL_REVIEWS_MAPPER reviews = {halls} />

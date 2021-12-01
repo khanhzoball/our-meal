@@ -26,6 +26,9 @@ const Login = () => {
                 localStorage.setItem("username", resJson.username);
                 window.location.href = './';
             };
+        })
+        .catch( (error) => {
+            console.log(error);
         });
     };
 

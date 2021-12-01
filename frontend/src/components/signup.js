@@ -25,6 +25,9 @@ const Signup = () => {
             else {
                 message.innerHTML = resJson.message + "<br/>";
             };
+        })
+        .catch( (error) => {
+            console.log(error);
         });
     };
 
@@ -34,7 +37,7 @@ const Signup = () => {
             <br/>
             <input type="password" placeholder="password" value={password} onChange={ (e) => setPassword(e.target.value) }/>
             <br/>
-            <span id="message"></span>
+            <span className="increase txtcolor"id="message"></span>
             <button className="button navopt" id="submit_button" onClick={ () => Post() }>Sign up</button>
         </div>
     );

@@ -38,7 +38,7 @@ const Menu = () => {
             })
             .catch( (error) => {
                 console.log(error);
-            })
+            });
         },[]); 
 
         // Mapping Menu
@@ -103,16 +103,19 @@ const Menu = () => {
                             else {
                                 message.innerHTML = resJson.message + "<br/>";
                             };
+                        })
+                        .catch( (error) => {
+                            console.log(error);
                         });
                     };
                     
                     if (props.menuItem.itemSizes[0].nutritionalInfo) {
                         return (
                             <div>
-                                <h4 className="mealname">
+                                <h3 className="mealname">
                                 {props.menuItem.name}  
-                                </h4>
                                 <button className="button navopt" id="submit_button" onClick={ () => Add_to_Plan() }>Add to Plan</button>
+                                </h3>
                                 <span id={props.menuItem.name}></span>
                                 <div className ="info">
                                     {
@@ -138,9 +141,9 @@ const Menu = () => {
 
                 return (
                     <div>
-                        <h3>
+                        <h2 className="mtype">
                             {props.category.name}
-                        </h3>
+                        </h2>
                         <div className="Items">
                         {
                             props.category.menuItem.map( (menuItem) => 
@@ -155,7 +158,7 @@ const Menu = () => {
             
             return (
                 <div className="ib">
-                    <h2>
+                    <h2 className="meal">
                     {props.meal_name}
                     </h2>
                     <div className="Categories">
@@ -193,6 +196,9 @@ const Menu = () => {
                 else {
                     message.innerHTML = resJson.message + "<br/>";
                 };
+            })
+            .catch( (error) => {
+                console.log(error);
             });
         };
 
@@ -218,6 +224,9 @@ const Menu = () => {
                 else {
                     likes.current = resJson.likes;
                 };
+            })
+            .catch( (error) => {
+                console.log(error);
             });
         },[]); 
 
@@ -243,6 +252,9 @@ const Menu = () => {
                     message.innerHTML = resJson.message + "<br/>";
                     likes.current = resJson.likes;
                 }
+            })
+            .catch( (error) => {
+                console.log(error);
             });
         };
         
@@ -265,7 +277,7 @@ const Menu = () => {
                     <input type="text" placeholder="comment" onChange={ (e) => {comment.current = e.target.value} }/>
                     <br/>
                     <button className="button navopt" id="submit_button" onClick={ () => Add_Comment() }>Add Comment</button>
-                    <button className="viewmenu" onClick={ () => view_menu() }>view_menu</button>
+                    <button className="button navopt viewmenu" onClick={ () => view_menu() }>Hide Menu</button>
                     <br/>
                     <span id={props.hall_name}></span>
                     </h2>
@@ -284,7 +296,7 @@ const Menu = () => {
         } else {
             return (
                 <div className="Halls">
-                    <h2>
+                    <h1>
                     {props.hall_name}
                     
                     <br/>
@@ -294,10 +306,10 @@ const Menu = () => {
                     <input type="text" placeholder="comment" onChange={ (e) => {comment.current = e.target.value} }/>
                     <br/>
                     <button className="button navopt" id="submit_button" onClick={ () => Add_Comment() }>Add Comment</button>
-                    <button className="viewmenu" onClick={ () => view_menu() }>view_menu</button>
+                    <button className="button navopt viewmenu" onClick={ () => view_menu() }>View Menu</button>
                     <br/>
                     <span id={props.hall_name}></span>
-                    </h2>
+                    </h1>
                 </div>     
             );
         };
@@ -319,7 +331,7 @@ const Menu = () => {
     if (sort) {
         return (
             <div> 
-                <button onClick={ () => Sort_Halls() }>Sort Halls</button>
+                <button className="button navopt sortbut" onClick={ () => Sort_Halls() }>Unsort</button>
                 {
                     sorted_halls.map( (halls) => 
                     {
@@ -331,7 +343,7 @@ const Menu = () => {
     } else {
         return (
             <div>
-                <button onClick={ () => Sort_Halls() }>Sort Halls</button>
+                <button className="button navopt sortbut" onClick={ () => Sort_Halls() }>A-Z Sort</button>
                 {
                     halls.map( (halls) => 
                     {
