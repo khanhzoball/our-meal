@@ -158,8 +158,8 @@ const Home = () => {
     return (
         <div className ="center">
             <h1>Home</h1>
-            <div className="flexer">
-            <div className="daily">
+            <div className ="ib2">
+            <div className="d2">
             <h3>Daily Total</h3>
                 Calories: {Calories}
                 <br/>
@@ -210,7 +210,10 @@ const Home = () => {
                 options={{
                     title: 'Daily Total',
                     backgroundColor: 'transparent',
-                    
+                    legend: {
+                        textStyle: {color: 'white'}
+                    }
+                                       
                 }}
                 rootProps={{ 'data-testid': '1' }}
                 />

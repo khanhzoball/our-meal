@@ -42,7 +42,15 @@
     margin: auto;
     width: 16%;
     text-align: center;
-    
+}
+.d2
+{
+    font-size: 20px;
+    background-color: rgb(97, 191, 223);
+    border-radius: 40px;
+    width: 200px;
+    text-align: center;
+    margin: auto;
 }
 .float-container {
     display:flex;   
@@ -60,7 +68,8 @@
 }
 .mealname:hover ~ .info{
     display: block;
-
+    background-color: lightblue;
+    border-radius: 10px;
 }
 .upvote{
     width: 30px;
@@ -100,12 +109,19 @@ input[type=text] {
 {
     padding: 10px;
     border-radius: 6px;
-    display: inline-block;
+    display:inline-block;
     background-color: rgb(97, 191, 223);
     margin-left: 20px;
     margin-right: 20px;
 }
+.ib2
+{
+    display: inline-block;
+}
 .flexer
 {
     display: flex;
+}
+.com{
+    color: white;
 }

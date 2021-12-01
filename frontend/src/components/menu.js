@@ -258,8 +258,7 @@ const Menu = () => {
                 <h2>
                 {props.hall_name}
                 <br/>
-                <div>{likes.current}
-                </div>
+                {likes.current}
                 <button className="upvote" onClick={ () => Like() }><img src={up} className="upvote"></img></button>
 
                 <br/>

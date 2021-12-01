@@ -115,7 +115,7 @@ const Reviews = () => {
             />
             <br/>
             
-            <span id="message"></span>
+            <span className="com" id="message"></span>
             <button className="button navopt" id="submit_button" onClick={ () => Post() }>View Reviews</button>
             <div>
                 {
