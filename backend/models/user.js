@@ -14,6 +14,10 @@ const userSchema = new mongoose.Schema({
     foods: {
         type: Array,
         required: true,
+    },
+    likedhalls: {
+        type: Array,
+        required: true
     }
 })
 
