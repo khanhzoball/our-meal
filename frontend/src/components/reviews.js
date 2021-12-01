@@ -79,6 +79,9 @@ const Reviews = () => {
                 sethall_comments_arr(resJson.reviews);
                 message.innerHTML = "";;
             };
+        })
+        .catch( (error) => {
+            console.log(error);
         });
     };
 

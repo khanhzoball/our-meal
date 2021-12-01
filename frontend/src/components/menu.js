@@ -39,7 +39,7 @@ const Menu = () => {
             .catch( (error) => {
                 console.log(error);
             })
-        },[]); 
+        },[]);
 
         // Mapping Menu
         const MENU_MAPPER = (props) => {
@@ -103,6 +103,9 @@ const Menu = () => {
                             else {
                                 message.innerHTML = resJson.message + "<br/>";
                             };
+                        })
+                        .catch( (error) => {
+                            console.log(error);
                         });
                     };
                     
@@ -193,6 +196,9 @@ const Menu = () => {
                 else {
                     message.innerHTML = resJson.message + "<br/>";
                 };
+            })
+            .catch( (error) => {
+                console.log(error);
             });
         };
 
@@ -218,6 +224,9 @@ const Menu = () => {
                 else {
                     likes.current = resJson.likes;
                 };
+            })
+            .catch( (error) => {
+                console.log(error);
             });
         },[]); 
 
@@ -243,6 +252,9 @@ const Menu = () => {
                     message.innerHTML = resJson.message + "<br/>";
                     likes.current = resJson.likes;
                 }
+            })
+            .catch( (error) => {
+                console.log(error);
             });
         };
         

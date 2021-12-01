@@ -44,6 +44,9 @@ const Home = () => {
             } else {
                 message.innerHTML = resJson.error + "<br/>";
             };
+        })
+        .catch( (error) => {
+            console.log(error);
         });
     },[updated]); 
 
@@ -95,9 +98,12 @@ const Home = () => {
                     username: localStorage.username,
                 }),
             })
-            .then((response) => response.json())
+            .then( (response) => response.json())
             .then( (resJson) => {
                 setUpdated(updated + 1)
+            })
+            .catch( (error) => {
+                console.log(error);
             });
         };
 
@@ -140,6 +146,9 @@ const Home = () => {
             //     else {
             //         message.innerHTML = data.message + "<br/>";
             //     }
+            })
+            .catch( (error) => {
+                console.log(error);
             });
         };
 

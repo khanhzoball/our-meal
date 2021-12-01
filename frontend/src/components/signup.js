@@ -25,6 +25,9 @@ const Signup = () => {
             else {
                 message.innerHTML = resJson.message + "<br/>";
             };
+        })
+        .catch( (error) => {
+            console.log(error);
         });
     };
 
