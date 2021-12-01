@@ -1,6 +1,7 @@
 const express = require("express")
 const mongoose = require("mongoose")
 const hall = mongoose.model("hall")
+const user = mongoose.model("user")
 const jwt = require("jsonwebtoken")
 const router = express.Router()
 const secret = process.env.SECRET
@@ -54,22 +55,54 @@ router.post("/comment", (request, response) => {
 })
 router.post("/like", (request, response) => {
     const hall_name = request.body.hall_name
+    const username = request.body.username
 
     if (!hall_name) {
         response.status(422).json({ error: "Please add all fields" })
     }
 
+    if (!username) {
+        response.status(422).json({ error: "You must be logged in to like." })
+    }
+
     hall.findOne({name: hall_name})
     .then((saved_hall) => {
         if (saved_hall) {
-            var temp = saved_hall.likes
-            temp += 1
-            saved_hall.likes = temp
-            saved_hall.save()
-            response.json({
-                likes: temp,
-                message: "Liked!",
+            user.findOne({username: username})
+            .then((user) => {
+                let already_liked = false
+                for (let i = 0; i <  user.likedhalls.length; i++) {
+                    if (user.likedhalls[i] == hall_name) {
+                        console.log(true)
+                        already_liked = true
+                        break;
+                    }
+                }
+                
+                if (already_liked == false) {
+                    var temp = saved_hall.likes
+                    temp += 1
+                    saved_hall.likes = temp
+                    saved_hall.save()
+
+                    var temp2 = user.likedhalls
+                    temp2.push(hall_name)
+                    user.likedhalls = temp2
+                    user.save()
+
+                    response.json({
+                        likes: temp,
+                        message: "Liked!",
+                    })              
+                } else {
+                    response.status(422).json({ error: "You Already Liked this hall!" })
+                }
+               
             })
+            .catch(error => {
+                console.log(error)
+            })
+
         } else {
             response.status(404).json({ error: "Dining Hall does not exist" });
         }
