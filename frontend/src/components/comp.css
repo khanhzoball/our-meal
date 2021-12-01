@@ -38,14 +38,16 @@
     font-size: 18px;
     padding: 6px;
     border-radius: 40px;
-    background-color: #1b6fcf;
+    background-color: rgb(97, 191, 223);
     margin: auto;
     width: 16%;
     text-align: center;
     
 }
 .float-container {
-    display:flex;    
+    display:flex;   
+    margin-left: 20px;
+    margin-bottom: 20px;
 }
 .ib{
     display: inline-block;
@@ -53,10 +55,11 @@
     margin-bottom: 20px;
 }
 .info{
-display: none;
+    display: none;
 }
-.info:hover{
-    display:block
+.mealname:hover ~ .info{
+    display: block;
+
 }
 .upvote{
     width: 30px;
@@ -70,9 +73,9 @@ display: none;
 }
 input[type=text] {
     width: 20%;
-    padding: 8px 0px;
+    padding: 8px 2px;
     margin: 8px;
-    border-radius: 1000px;
+    border-radius: 15px;
     box-sizing: border-box;
     border: 3px solid #ccc;
     -webkit-transition: 0.5s;
@@ -88,7 +91,6 @@ input[type=text] {
 .Halls{
     padding: 10px;
     border-radius: 6px;
-    display: flex;
     background-color: #0f4d92;
     margin: 15px;
 
@@ -97,11 +99,11 @@ input[type=text] {
 {
     padding: 10px;
     border-radius: 6px;
-    display: flex;
-    background-color: lightblue;
-
+    display: inline-block;
+    background-color: rgb(97, 191, 223);
+    margin-left: 20px;
+    margin-right: 20px;
 }
-
 .flexer
 {
     display: flex;

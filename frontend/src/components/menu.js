@@ -114,7 +114,7 @@ const Menu = () => {
                     if (props.menuItem.itemSizes[0].nutritionalInfo) {
                         return (
                             <div>
-                                <h4>
+                                <h4 className="mealname">
                                 {props.menuItem.name} 
                                 <button className="button navopt" id="submit_button" onClick={ () => Add_to_plan() }>Add to Plan</button>
                                 </h4>
@@ -161,7 +161,7 @@ const Menu = () => {
             }
             
             return (
-                <div className="float-pointer">
+                <div className="ib">
                     <h2>
                     {props.meal_name}
                     </h2>
@@ -264,11 +264,12 @@ const Menu = () => {
 
                 <br/>
                 <input type="text" placeholder="comment" onChange={ (e) => {comment.current = e.target.value} }/>
+                <br/>
                 <button className="button navopt" id="submit_button" onClick={ () => Add_Comment() }>Add Comment</button>
                 <br/>
                 <span id={props.hall_name}></span>
                 </h2>
-                <div className="float-container">
+                <div className="ib">
                     <div className="hallName">
                         {
                             menus.map(menus => 
