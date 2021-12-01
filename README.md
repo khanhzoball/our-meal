@@ -9,7 +9,7 @@ go to frontend in first terminal window
 
 run "npm update"
 
-go to frontend/src in one terminal window and backend in another terminal window
+go to frontend/src in one terminal window and backend in second terminal window
 
 rum "npm start" in frontend/src
 
