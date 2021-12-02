@@ -115,7 +115,7 @@ const Menu = () => {
                             <div>
                                 <h3 className="mealname">
                                 {props.menuItem.name}  
-                                <button className="button navopt" id="submit_button" onClick={ () => Add_to_Plan() }>Add to Plan</button>
+                                <button className="button navopt marg" id="submit_button" onClick={ () => Add_to_Plan() }>Add to Plan</button>
                                 </h3>
                                 <span id={props.menuItem.name}></span>
                                 <div className ="info">
@@ -203,7 +203,7 @@ const Menu = () => {
             });
         };
 
-        const likes = useRef(0);
+        const [likes, setLikes] = useState(0);
 
         useEffect( () => {
             fetch("/retrievelikes", {
@@ -223,7 +223,7 @@ const Menu = () => {
                     message.innerHTML = resJson.error + "<br/>";
                 }
                 else {
-                    likes.current = resJson.likes;
+                    setLikes(resJson.likes);
                 };
             })
             .catch( (error) => {
@@ -251,7 +251,7 @@ const Menu = () => {
                 }
                 else {
                     message.innerHTML = resJson.message + "<br/>";
-                    likes.current = resJson.likes;
+                    setLikes(resJson.likes);
                 }
             })
             .catch( (error) => {
@@ -268,11 +268,11 @@ const Menu = () => {
         if (view) {
             return (
                 <div className="Halls">
-                    <h2>
-                    {props.hall_name}
-                    
-                    <br/>
-                    {likes.current}
+                    <h1 >
+                    <div className="hname">    
+                     {props.hall_name}
+                    </div>
+                    {likes}
                     <button className="upvote" onClick={ () => Like() }><img src={up} className="upvote"></img></button>
                     <br/>
                     <input type="text" placeholder="comment" onChange={ (e) => {comment.current = e.target.value} }/>
@@ -281,7 +281,7 @@ const Menu = () => {
                     <button className="button navopt viewmenu" onClick={ () => view_menu() }>Hide Menu</button>
                     <br/>
                     <span id={props.hall_name}></span>
-                    </h2>
+                    </h1>
                     
                         <div className="hallName">
                             {
@@ -297,11 +297,11 @@ const Menu = () => {
         } else {
             return (
                 <div className="Halls">
-                    <h1>
-                    {props.hall_name}
-                    
-                    <br/>
-                    {likes.current}
+                    <h1 >
+                    <div className="hname">    
+                     {props.hall_name}
+                    </div>
+                    {likes}
                     <button className="upvote" onClick={ () => Like() }><img src={up} className="upvote"></img></button>
                     <br/>
                     <input type="text" placeholder="comment" onChange={ (e) => {comment.current = e.target.value} }/>

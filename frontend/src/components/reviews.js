@@ -102,9 +102,9 @@ const Reviews = () => {
             />
             <br/>
             
-            <span  id="message"></span>
+            <span className="increase" id="message"></span>
             <button className="button navopt" id="submit_button" onClick={ () => Post() }>View Reviews</button>
-            <div className="txtcolor increase">
+            <div className="increase">
                 {
                     hall_comments_arr.map((halls) => {
                         return <HALL_REVIEWS_MAPPER reviews = {halls} />

@@ -39,7 +39,7 @@ const Login = () => {
             <br/>
             <input type="password" placeholder="password" value={password} onChange={ (e) => setPassword(e.target.value) }/>
             <br/>
-            <span id="message"></span>
+            <span  className="increase" id="message"></span>
             <button className="button navopt" id="submit_button" onClick={ () => Post() }>Log in</button>
         </div>
     );
