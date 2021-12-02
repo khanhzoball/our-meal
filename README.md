@@ -28,8 +28,6 @@ Open up 2 simultaneous terminal windows
 
     In terminal window 1
 
-    cd src
-
     npm start
 
     In terminal window 2
