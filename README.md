@@ -9,34 +9,32 @@ Open up 2 simultaneous terminal windows
 
 1. Instructions for terminal window 1
 
-cd our-meal         #cd into the cloned repository 
+    cd our-meal         #cd into the cloned repository 
 
-cd frontend
+    cd frontend
 
-npm update
+    npm update
 
 
 2. Instructions for terminal window 2
 
-cd our-meal        #cd into the cloned repository 
+    cd our-meal        #cd into the cloned repository 
 
-cd backend
+    cd backend
 
-npm update
+    npm update
 
 3. After npm update completes in both terminal windows, do the following simultaneously
 
-In terminal window 1
+    In terminal window 1
 
-cd src
+    cd src
 
-npm start
+    npm start
 
-In terminal window 2
+    In terminal window 2
 
-node app.js
-
-
+    node app.js
 
 App should run on localhost:3000
 
