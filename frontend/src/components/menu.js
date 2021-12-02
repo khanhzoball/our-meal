@@ -92,6 +92,7 @@ const Menu = () => {
                             body: JSON.stringify({
                                 menuItem: props.menuItem,
                                 username: localStorage.username,
+                                password: localStorage.password,
                             }),
                         })
                         .then( (response) => response.json())

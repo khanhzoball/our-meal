@@ -24,6 +24,7 @@ const Login = () => {
             }
             else {
                 localStorage.setItem("username", resJson.username);
+                localStorage.setItem("password", resJson.password);
                 window.location.href = './';
             };
         })

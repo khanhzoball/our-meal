@@ -6,6 +6,7 @@ const user = mongoose.model("user");
 
 router.post("/addfood", (request, response) => {
     const username = request.body.username;
+    const password = request.body.password;
     const hall_name = request.body.menuItem.name;
     const nutrional_info = request.body.menuItem.itemSizes[0].nutritionalInfo;
 
@@ -16,17 +17,20 @@ router.post("/addfood", (request, response) => {
     user.findOne({ username: username })
     .then( (user) => {
         if (user) {
-            let temp = user.foods;
-            temp.push(
-                {
-                    name: hall_name,
-                    nutritionalInfo: nutrional_info,
-                    //Added this line here ^ to add nutrional info
-                });
-            user.foods = temp;
-            user.save();
-            response.json({ message: "Food Successfully added!" });
-            
+            if (!password || password != user.password) {
+                return response.status(422).json({ error: "Please log in to view plan." });
+            } else {
+                let temp = user.foods;
+                temp.push(
+                    {
+                        name: hall_name,
+                        nutritionalInfo: nutrional_info,
+                        //Added this line here ^ to add nutrional info
+                    });
+                user.foods = temp;
+                user.save();
+                response.json({ message: "Food Successfully added!" });
+            };
         } else {
             response.status(404).json({ error: "User not found." });
         };

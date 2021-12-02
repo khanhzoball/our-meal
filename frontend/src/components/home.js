@@ -18,9 +18,11 @@ const Home = () => {
     let Protein = 0;
 
     const username = localStorage.username;
+    const password = localStorage.password;
 
     const Log_Out = () => {
         delete localStorage.username;
+        delete localStorage.password;
         window.location.href = './';
     };
     
@@ -33,6 +35,7 @@ const Home = () => {
             },
             body: JSON.stringify({
                 username,
+                password,
             }),
         })
         .then( (response) => response.json())

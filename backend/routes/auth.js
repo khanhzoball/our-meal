@@ -7,7 +7,9 @@ const user = mongoose.model("user");
 
 // Default homepage
 router.post("/plan", (request, response) => {
-    const username = request.body.username
+    const username = request.body.username;
+    const password = request.body.password;
+
     if (!username) {
         return response.status(422).json({ error: "Please log in to view plan." });
     };
@@ -15,7 +17,12 @@ router.post("/plan", (request, response) => {
     user.findOne({username: username})
     .then( (user) => {
         if (user) {
-            response.json({ foods: user.foods });
+            if (!password || password != user.password)
+            {
+                return response.status(422).json({ error: "Please log in to view plan." });
+            } else {
+                response.json({ foods: user.foods });
+            };
         } else {
             response.status(404).json({ error: "User not found." });
         };
@@ -80,6 +87,7 @@ router.post("/login", (request, response) => {
         else if (saved_user.password == password) {
             response.json({
                 username: username,
+                password: password,
             });
         } else {
             return response.status(422).json({ error: "Invalid username or password." });
