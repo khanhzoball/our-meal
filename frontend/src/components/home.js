@@ -44,6 +44,9 @@ const Home = () => {
             } else {
                 message.innerHTML = resJson.error + "<br/>";
             };
+        })
+        .catch( (error) => {
+            console.log(error);
         });
     },[updated]); 
 
@@ -95,7 +98,7 @@ const Home = () => {
                     username: localStorage.username,
                 }),
             })
-            .then((response) => response.json())
+            .then( (response) => response.json())
             .then( (resJson) => {
                 setUpdated(updated + 1)
             })
