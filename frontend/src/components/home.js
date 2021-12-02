@@ -20,12 +20,12 @@ const Home = () => {
     const username = localStorage.username;
     const password = localStorage.password;
 
+    // If logged out refresh page and clear user
     const Log_Out = () => {
         delete localStorage.username;
-        delete localStorage.password;
         window.location.href = './';
     };
-    
+    // Gets user's food
     useEffect( () => {
         fetch("/plan", {
             method: "POST",
@@ -53,7 +53,7 @@ const Home = () => {
         });
     },[updated]); 
 
-
+    // Totals nutritional values
     for (let i = 0; i < foods.length; i++) {
         if (foods[i].nutritionalInfo[0].value) {Calories += foods[i].nutritionalInfo[0].value};
         if (foods[i].nutritionalInfo[1].value) {Total_Fat += foods[i].nutritionalInfo[1].value};
@@ -68,7 +68,7 @@ const Home = () => {
     };
 
     const FOOD_MAPPER = (props) => {
-
+        // Maps nutrition info into food mapper gets nutritional info and if it has any info returns it all together
         const NUTRITION_MAPPER = (props) => {
             let name = props.nutritionalInfo.name;
             let value = "";
@@ -86,15 +86,13 @@ const Home = () => {
             );
         };
 
-        
-
-        //added for Remove Button
-        const Remove_from_plan = () => {
-            fetch("/removefood", {
-                method: "POST",
-                headers: {
-                    "Content-Type":"application/json",
-                    "Accept":"application/json",
+    // Added for Remove Button
+    const Remove_from_plan = () => {
+        fetch("/removefood", {
+            method: "POST",
+            headers: {
+                "Content-Type":"application/json",
+                "Accept":"application/json",
                 },
                 body: JSON.stringify({
                     menuItem: props.foods,
@@ -111,11 +109,12 @@ const Home = () => {
         };
 
 
-
+        // Returns div with added food and info
         return (
             <div className ="daily ib">
                 <h3 >
                     {props.foods.name}
+                    <br/>
                     <button className="button navopt" onClick={ () => Remove_from_plan() }>Remove</button>
                 </h3>
                 {            
@@ -127,7 +126,7 @@ const Home = () => {
             </div>
         );
     };
-
+    // Wipes all meals from user's storage
         const Clear_All = () => {
             fetch("/clearall", {
                 method: "POST",
@@ -160,45 +159,48 @@ const Home = () => {
 
     return (
         <div className ="center">
-            <h1 className="txtcolor">Home</h1>
+            <h1 className ="hname">Home</h1>
             <h2>
                 <button className="button navopt"onClick = { () => Log_Out() }>Log out</button>
             </h2>
             <div className ="ib2">
+                {/* Total */}
                 <div className="d2">
                     <h3>Daily Total</h3>
-                    Calories: {Calories}
+                    Calories: {Calories} cal
                     <br/>
-                    Total Fat: {Total_Fat}
+                    Total Fat: {Total_Fat} m
                     <br/>
-                    Saturated Fat: {Saturated_Fat}
+                    Saturated Fat: {Saturated_Fat} m
                     <br/>
-                    Trans Fat: {Trans_Fat}
+                    Trans Fat: {Trans_Fat} m
                     <br/>
-                    Cholesterol: {Cholesterol}
+                    Cholesterol: {Cholesterol} g
                     <br/>
-                    Sodium: {Sodium}
+                    Sodium: {Sodium} g
                     <br/>
-                    Total Carbohydrate: {Total_Carbohydrate}
+                    Total Carbs: {Total_Carbohydrate} m
                     <br/>
-                    Dietary Fiber: {Dietary_Fiber}
+                    Dietary Fiber: {Dietary_Fiber} m
                     <br/>
-                    Sugars: {Sugars}
+                    Sugars: {Sugars} m
                     <br/>
-                    Protein: {Protein}
+                    Protein: {Protein} m
                     <br/>
                     <button className="button navopt" onClick={ () => Clear_All() }>Clear Plan</button>
                 </div>
                 <div className = "center">
                     <br/>
+                    {/* On click changes state to opposite to act as switch */}
                     <button className="button navopt" onClick={() => setVisible(!visible)}>
                         {visible ? 'Hide': 'Show Graph'}
                     </button>
+                    {/* If button is clicked displays div */}
                     {visible && <div>
                         
                     <Chart
-                    width={'500px'}
-                    height={'400px'}
+                    width={'680px'}
+                    height={'300px'}
                     chartType="PieChart"
                     loader={<div>Loading Chart</div>}
                     data={[
@@ -206,28 +208,29 @@ const Home = () => {
                         ['Total Fat', Total_Fat],
                         ['Saturated Fat', Saturated_Fat],
                         ['Trans Fat', Trans_Fat],
-                        ['Cholesterol', Cholesterol],
-                        ['Sodium', Sodium],
-                        ['Total Carbohydrate', Total_Carbohydrate],
+                        ['Total Carbs', Total_Carbohydrate],
                         ['Dietary Fiber', Dietary_Fiber],
                         ['Sugars', Sugars],
                         ['Protein', Protein],
                     ]}
                     options={{
-                        title: 'Daily Total',
-                        backgroundColor: 'transparent',
+                        backgroundColor: 'rgb(97, 191, 223)',
                         legend: {
-                            textStyle: { color: 'white' },
+                            textStyle: { color: 'black', 
+                            fontSize: 18   },
                         },
+                        is3D: true,
                     }}
                     rootProps={{ 'data-testid': '1' }}
                     />
-                        </div>}
+                    </div>}
                 </div>
                 <br/>
                 </div>
             <br/>
-            <span className="txtcolor increase"id="message"></span>
+
+            <span className="increase"id="message"></span>
+            {/* Foods with info */}
             <div className="ib" >
                 {            
                     foods.map( (foods) => {
