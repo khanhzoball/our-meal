@@ -1,103 +1,102 @@
-const express = require("express")
-const mongoose = require("mongoose")
-const user = mongoose.model("user")
-const jwt = require("jsonwebtoken")
-const router = express.Router()
-const secret = process.env.SECRET
-const login_verif = require("../middlewares/login_verif.js")
+const express = require("express");
+const mongoose = require("mongoose");
 
+const router = express.Router();
+const user = mongoose.model("user");
 
 router.post("/addfood", (request, response) => {
-    
-    if (!request.body.username) {
-        return response.status(422).json({ error: "Please log in to add to plan" });
-    }
+    const username = request.body.username;
+    const password = request.body.password;
+    const hall_name = request.body.menuItem.name;
+    const nutrional_info = request.body.menuItem.itemSizes[0].nutritionalInfo;
 
-    user.findOne({username: request.body.username})
-    .then((user) => {
+    if (!username) {
+        return response.status(422).json({ error: "Please log in to add to plan." });
+    };
+
+    user.findOne({ username: username })
+    .then( (user) => {
         if (user) {
-            var temp = user.foods
-            temp.push(
-                {
-                    name: request.body.menuItem.name,
-                    nutritionalInfo: request.body.menuItem.itemSizes[0].nutritionalInfo
-                    //Added this line here ^ to add nutrional info
-                })
-            user.foods = temp
-            user.save()
-            response.json({ message: "Food Successfully added!" })
-            
+            if (!password || password != user.password) {
+                return response.status(422).json({ error: "Please log in to view plan." });
+            } else {
+                let temp = user.foods;
+                temp.push(
+                    {
+                        name: hall_name,
+                        nutritionalInfo: nutrional_info,
+                        //Added this line here ^ to add nutrional info
+                    });
+                user.foods = temp;
+                user.save();
+                response.json({ message: "Food Successfully added!" });
+            };
         } else {
-            response.status(404).json({ error: "Error" });
-            console.log("error here")
-        }       
+            response.status(404).json({ error: "User not found." });
+        };
     })
-    .catch(error => {
-        console.log(error)
-        console.log("error happens here")
-    })
-})
+    .catch( (error) => {
+        console.log(error);
+    });
+});
 
 router.post("/clearall", (request, response) => {
-    if (!request.body.username) {
-        return response.status(422).json({ error: "Please log in before clearing your plan" });
-    }
+    const username = request.body.username;
 
-    user.findOne({username: request.body.username})
-    .then((user) => {
+    if (!username) {
+        return response.status(422).json({ error: "Please log in before clearing your plan" });
+    };
+
+    user.findOne({ username: username })
+    .then( (user) => {
         if (user) {
-            user.foods = []
-            user.save()
-            response.json({ message: "Plan successfully cleared" })
+            user.foods = [];
+            user.save();
+            response.json({ message: "Plan successfully cleared" });
 
         } else {
-            response.status(404).json({ error: "Error" });
-            console.log("error here")
-        }       
+            response.status(404).json({ error: "User not found." });
+        };
     })
-    .catch(error => {
-        console.log(error)
-        console.log("error happens here")
-    })
-})
+    .catch( (error) => {
+        console.log(error);
+    });
+});
 
 //added for Remove Button
 router.post("/removefood", (request, response) => {
-    
-    if (!request.body.username) {
-        return response.status(422).json({ error: "Please log in to add to plan" });
-    }
+    const username = request.body.username;
+    const food_name = request.body.menuItem.name;
 
-    user.findOne({username: request.body.username})
-    .then((user) => {
+    if (!username) {
+        return response.status(422).json({ error: "Please log in to add to plan" });
+    };
+
+    user.findOne({ username: username })
+    .then( (user) => {
         if (user) {
-            var temp = user.foods
-            var index = 0
+            let temp = user.foods;
+            let index = 0;
 
             for (let i = 0; i < temp.length; i++) {
-                if (temp[i].name == request.body.menuItem.name) {
-                    index = i
+                if (temp[i].name == food_name) {
+                    index = i;
                     break;
                 }
             }
             temp.splice(index, 1);
-            user.foods = temp
+            user.foods = temp;
 
-            user.save()
-            response.json({ message: "Food Successfully removed!" })
+            user.save();
+            response.json({ message: "Food Successfully removed!" });
             
         } else {
-            response.status(404).json({ error: "Error" });
-            console.log("error here")
-        }       
+            response.status(404).json({ error: "User not found." });
+        };
     })
-    .catch(error => {
-        console.log(error)
-        console.log("error happens here")
-    })
-})
+    .catch( (error) => {
+        console.log(error);
+    });
+});
 
-
-
-
-module.exports = router
+module.exports = router;

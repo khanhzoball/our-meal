@@ -14,7 +14,11 @@ const userSchema = new mongoose.Schema({
     foods: {
         type: Array,
         required: true,
-    }
-})
+    },
+    likedhalls: {
+        type: Array,
+        required: true,
+    },
+});
 
-mongoose.model("user", userSchema)
+mongoose.model("user", userSchema);

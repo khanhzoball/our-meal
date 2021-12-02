@@ -7,13 +7,13 @@ import Signup from "./components/signup.js";
 import Login from "./components/login.js";
 import Menu from "./components/menu.js";
 import Reviews from "./components/reviews.js"
-
+import "./components/comp.css";
 
 
 function App() {
   return (
     <BrowserRouter>
-      <Navbar />
+      <Navbar/>
       <Routes>
         <Route path="/" element={<Home/>}/>
         <Route path="/signup" element={<Signup/>}/>

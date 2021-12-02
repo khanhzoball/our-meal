@@ -11,7 +11,7 @@ var hallSchema = new mongoose.Schema({
     },
     comments: {
         type: Array,
-    }
-})
+    },
+});
 
-mongoose.model("hall", hallSchema)
+mongoose.model("hall", hallSchema);

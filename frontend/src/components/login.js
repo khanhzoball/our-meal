@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { React, useState } from "react";
 
 const Login = () => {
     const [username, setUsername] = useState("");
@@ -14,32 +14,35 @@ const Login = () => {
             body: JSON.stringify({
                 username,
                 password,
-            })
+            }),
         })
-        .then(response => response.json())
-        .then(data => {
-            var message = document.getElementById("message")
-            if (data.error) {
-                message.innerHTML = data.error + "<br/>";
+        .then( (response) => response.json())
+        .then( (resJson) => {
+            let message = document.getElementById("message");
+            if (resJson.error) {
+                message.innerHTML = resJson.error + "<br/>";
             }
             else {
-                localStorage.setItem("jwt", data.token)
-                localStorage.setItem("username", data.username)
+                localStorage.setItem("username", resJson.username);
+                localStorage.setItem("password", resJson.password);
                 window.location.href = './';
-            }
+            };
         })
-    }
+        .catch( (error) => {
+            console.log(error);
+        });
+    };
 
     return (
         <div>
             <input type="text" placeholder="username" value={username} onChange={ (e) => setUsername(e.target.value) }/>
             <br/>
-            <input type="text" placeholder="password" value={password} onChange={ (e) => setPassword(e.target.value) }/>
+            <input type="password" placeholder="password" value={password} onChange={ (e) => setPassword(e.target.value) }/>
             <br/>
             <span id="message"></span>
-            <button id="submit_button" onClick={ () => Post() }>Log in</button>
+            <button className="button navopt" id="submit_button" onClick={ () => Post() }>Log in</button>
         </div>
-    )
-}
+    );
+};
 
-export default Login
+export default Login;

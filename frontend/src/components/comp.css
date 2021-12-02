@@ -1,0 +1,170 @@
+.topnav{
+    background-color: #0a3669;
+    color:black;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index:1;
+
+}
+.button {
+    background-color: #FFCB05;
+    border: none;
+    color: white;
+    padding: 5px 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline;
+    
+
+  }
+.navopt
+{
+    border-radius: 4px;
+    background-color: #f3ae2d;
+    display: inline-block;
+    padding: 6px 16px;
+    border-radius: 1000px;
+    color: var(--black-600);
+    text-align:center;
+}
+.navopt:hover {
+    background-color: #c88c1a;
+  }
+.center{
+    text-align: center;
+}
+.daily{
+    font-size: 18px;
+    padding: 6px;
+    border-radius: 40px;
+    background-color: rgb(97, 191, 223);
+    margin: auto;
+    width: 200px;
+    text-align: center;
+}
+.d2
+{
+    font-size: 20px;
+    background-color: rgb(97, 191, 223);
+    border-radius: 40px;
+    width: 200px;
+    text-align: center;
+    margin: auto;
+    padding: 6px;
+
+}
+.float-container {
+    display:flex;   
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+.ib{
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+.info{
+    display: none;
+}
+.mealname:hover ~ .info{
+    display: block;
+    background-color: lightblue;
+    border-radius: 10px;
+}
+.upvote{
+    width: 30px;
+    height: auto;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    
+    outline: none;
+}
+input[type=text] {
+    width: 20%;
+    padding: 8px 2px;
+    margin: 8px;
+    border-radius: 15px;
+    box-sizing: border-box;
+    border: 3px solid #ccc;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    outline: none;
+  }
+  input[type=password] {
+    width: 20%;
+    padding: 8px 2px;
+    margin: 8px;
+    border-radius: 15px;
+    box-sizing: border-box;
+    border: 3px solid #ccc;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    outline: none;
+  }
+  input[type=password]:focus {
+    border: 3px solid #555;
+  }
+
+  input[type=text]:focus {
+    border: 3px solid #555;
+  }
+
+
+.Halls{
+    padding: 10px;
+    border-radius: 6px;
+    background-color: #0f4d92;
+    margin: 15px;
+
+}
+.hallName
+{
+    padding: 10px;
+    border-radius: 6px;
+    display:inline-block;
+    background-color: rgb(97, 191, 223);
+    margin-left: 20px;
+    margin-right: 20px;
+}
+.ib2
+{
+    display: inline-block;
+}
+.flexer
+{
+    display: flex;
+}
+.txtcolor{
+    color: white;
+}
+.increase{
+    font-size: large;
+}
+.viewmenu{
+    background-color: #09ac3a;
+    margin-left: 5px;
+
+}
+.viewmenu:hover{
+    background-color: #07882e;
+    margin-left: 5px;
+
+}
+.meal{
+    text-decoration: underline overline;
+}
+.mtype{
+    text-decoration: underline;
+}
+.sortbut{
+    background-color: red;
+    font-size: large;
+    margin-left: 10px;
+}
+.sortbut:hover {
+    background-color: darkred;
+}

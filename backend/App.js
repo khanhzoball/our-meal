@@ -1,25 +1,24 @@
-const express = require("express")
-const mongoose = require("mongoose")
-const dotenv = require("dotenv")
-require("./models/user.js")
+const express = require("express");
+const mongoose = require("mongoose");
+const dotenv = require("dotenv");
+require("./models/user.js");
 
-dotenv.config()
+dotenv.config();
 
-const App = express()
+const App = express();
 const PORT = process.env.PORT || 5000;
-const URI = process.env.MONGODB_URL
+const URI = process.env.MONGODB_URL;
 
 
-mongoose.connect(URI, { useNewUrlParser: true })
+mongoose.connect(URI, { useNewUrlParser: true });
 mongoose.connection.on("connected", () => {
-    console.log("Connected to MongoDB")
-})
+    console.log("Connected to MongoDB");
+});
 mongoose.connection.on("error", () => {
-    console.log("error connecting")
-})
+    console.log("error connecting");
+});
 
 require("./models/user");
-require("./models/plan");
 require("./models/hall");
 
 App.use(express.json());
@@ -29,5 +28,5 @@ App.use(require("./routes/plan.js"));
 
 
 App.listen(PORT, () => {
-    console.log(`Server is running on ${PORT}`)
-})
+    console.log(`Server is running on ${PORT}`);
+});
