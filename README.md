@@ -20,7 +20,7 @@ npm update
 
 cd our-meal        #cd into the cloned repository 
 
-cd nackend
+cd backend
 
 npm update
 
